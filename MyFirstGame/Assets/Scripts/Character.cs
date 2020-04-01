@@ -75,6 +75,11 @@ public class Character : Unit
     public override void ReceiveDamage()
     {
         _health--;
+        _rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
+        _rigidbody.AddForce(transform.up * 4, ForceMode2D.Impulse);
+        _sprite.color = Color.red;
+        // перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
+        Invoke("ColorWhite", 0.5F);
         Debug.Log(_health);
     }
 
@@ -84,5 +89,10 @@ public class Character : Unit
         _isGround = colliders.Length > 1;
 
         if (!_isGround) State = CharacterState.Jump;
+    }
+
+    private void ColorWhite()
+    {
+        _sprite.color = Color.white;
     }
 }
