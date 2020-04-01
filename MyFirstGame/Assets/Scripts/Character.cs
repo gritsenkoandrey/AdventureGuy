@@ -17,6 +17,7 @@ public class Character : Unit
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private SpriteRenderer _sprite;
+    private Bullet _bullet;
 
     private CharacterState State
     {
@@ -29,6 +30,7 @@ public class Character : Unit
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
+        _bullet = Resources.Load<Bullet>("Bullet");
     }
 
     private void FixedUpdate()
@@ -40,7 +42,8 @@ public class Character : Unit
     {
         if (_isGround) State = CharacterState.Idle;
 
-        if(Input.GetButton("Horizontal")) Run();
+        if (Input.GetButtonDown("Fire1")) Fire();
+        if (Input.GetButton("Horizontal")) Run();
         if(_isGround && Input.GetButtonDown("Jump")) Jump();
     }
 
@@ -58,6 +61,15 @@ public class Character : Unit
     private void Jump()
     {
         _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void Fire()
+    {
+        Vector3 position = transform.position;
+        position.y += 0;
+        Bullet newBullet = Instantiate(_bullet, position, _bullet.transform.rotation) as Bullet;
+        // задаем направление движения созданной пули
+        newBullet.Direction = newBullet.transform.right * (_sprite.flipX ? -1 : 1);
     }
 
     private void CheckGround()
