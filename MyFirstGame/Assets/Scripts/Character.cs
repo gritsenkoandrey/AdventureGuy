@@ -68,6 +68,8 @@ public class Character : Unit
         Vector3 position = transform.position;
         position.y += 0;
         Bullet newBullet = Instantiate(_bullet, position, _bullet.transform.rotation) as Bullet;
+        // при стрельбе мы являемся родителем пули и она не уничтожается
+        newBullet.Parent = gameObject;
         // задаем направление движения созданной пули
         newBullet.Direction = newBullet.transform.right * (_sprite.flipX ? -1 : 1);
     }
