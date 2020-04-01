@@ -7,8 +7,10 @@ public class Monster : Unit
     {
         Bullet bullet = collider.GetComponent<Bullet>();
         if (bullet)
-        {
             ReceiveDamage();
-        }
+
+        Unit unit = collider.GetComponent<Unit>();
+        if (unit && unit as Character)
+            unit.ReceiveDamage();
     }
 }

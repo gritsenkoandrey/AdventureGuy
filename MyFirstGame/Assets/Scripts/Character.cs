@@ -83,6 +83,8 @@ public class Character : Unit
         // перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
         Invoke("ColorWhite", 0.5F);
         Debug.Log(_health);
+        if(_health <= 0)
+            Destroy(gameObject);
     }
 
     private void CheckGround()
