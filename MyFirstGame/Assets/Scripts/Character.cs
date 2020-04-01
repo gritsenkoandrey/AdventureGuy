@@ -100,9 +100,9 @@ public class Character : Unit
         if (!_isGround) State = CharacterState.Jump;
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        Unit unit = collider.GetComponent<Unit>();
-        if(unit) ReceiveDamage();
-    }
+    //private void OnTriggerEnter2D(Collider2D collider)
+    //{
+    //    Unit unit = collider.GetComponent<Unit>();
+    //    if(unit) ReceiveDamage();
+    //}
 }
