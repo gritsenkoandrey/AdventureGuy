@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 
 
-public class Character : MonoBehaviour
+public enum CharacterState
+{
+    Idle = 0,
+    Run = 1,
+    Jump = 2
+}
+public class Character : Unit
 {
     [SerializeField] private float _speed = 3;
     [SerializeField] private int _health = 5;
-    [SerializeField] private float _jumpForce = 10.0F;
+    [SerializeField] private float _jumpForce = 10;
     private bool _isGround = false;
 
     private Rigidbody2D _rigidbody;
@@ -61,11 +67,4 @@ public class Character : MonoBehaviour
 
         if (!_isGround) State = CharacterState.Jump;
     }
-}
-
-public enum CharacterState
-{
-    Idle = 0,
-    Run = 1,
-    Jump = 2
 }
