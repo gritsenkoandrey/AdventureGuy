@@ -72,6 +72,12 @@ public class Character : Unit
         newBullet.Direction = newBullet.transform.right * (_sprite.flipX ? -1 : 1);
     }
 
+    public override void ReceiveDamage()
+    {
+        _health--;
+        Debug.Log(_health);
+    }
+
     private void CheckGround()
     {
         var colliders = Physics2D.OverlapCircleAll(transform.position, 0.8F);

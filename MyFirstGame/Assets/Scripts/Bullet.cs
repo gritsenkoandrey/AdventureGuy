@@ -13,6 +13,11 @@ public class Bullet : MonoBehaviour
         _sprite = GetComponent<SpriteRenderer>();
     }
 
+    private void Start()
+    {
+        Destroy(gameObject, 2);
+    }
+
     private void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position,
