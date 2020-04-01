@@ -82,9 +82,14 @@ public class Character : Unit
         _sprite.color = Color.red;
         // перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
         Invoke("ColorWhite", 0.5F);
-        Debug.Log(_health);
+        //Debug.Log(_health);
         if(_health <= 0)
-            Destroy(gameObject);
+            Die();
+    }
+
+    private void ColorWhite()
+    {
+        _sprite.color = Color.white;
     }
 
     private void CheckGround()
@@ -95,8 +100,9 @@ public class Character : Unit
         if (!_isGround) State = CharacterState.Jump;
     }
 
-    private void ColorWhite()
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        _sprite.color = Color.white;
+        Unit unit = collider.GetComponent<Unit>();
+        if(unit) ReceiveDamage();
     }
 }
