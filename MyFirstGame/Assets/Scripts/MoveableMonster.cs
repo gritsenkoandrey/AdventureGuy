@@ -5,13 +5,11 @@ using System.Linq;
 public class MoveableMonster : Monster
 {
     [SerializeField] private float _speed = 2.0F;
-    private Bullet _bullet;
     private SpriteRenderer _sprite;
     private Vector3 _direction;
 
     protected override void Awake()
     {
-        _bullet = Resources.Load<Bullet>("Bullet");
         _sprite = GetComponent<SpriteRenderer>();
     }
     protected override void Start()
@@ -31,7 +29,7 @@ public class MoveableMonster : Monster
         Unit unit = collider.GetComponent<Unit>();
         if (unit && unit as Character)
         {
-            if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.3F)
+            if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.5F)
                 ReceiveDamage();
             else unit.ReceiveDamage();
         }

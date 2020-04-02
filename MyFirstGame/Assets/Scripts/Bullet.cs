@@ -6,11 +6,19 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _speed = 10;
 
     private Vector3 _direction;
-    public Vector3 Direction { set { _direction = value; } }
+    public Vector3 Direction
+    {
+        set { _direction = value; }
+    }
     private SpriteRenderer _sprite;
 
     private GameObject _parent;
-    public GameObject Parent { set { _parent = value; } }
+
+    public GameObject Parent
+    {
+        get { return _parent; }
+        set { _parent = value; }
+    }
 
     private void Awake()
     {
@@ -34,6 +42,7 @@ public class Bullet : MonoBehaviour
 
         if (unit && unit.gameObject != _parent)
         {
+            //unit.ReceiveDamage(); // если пуля не принадлежит созданному его объекту, то она наносит урон
             Destroy(gameObject);
         }
     }
