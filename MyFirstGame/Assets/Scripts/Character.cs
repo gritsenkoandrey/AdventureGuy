@@ -5,7 +5,8 @@ public enum CharacterState
 {
     Idle = 0,
     Run = 1,
-    Jump = 2
+    Jump = 2,
+    ReceiveDamage = 3
 }
 public class Character : Unit
 {
@@ -109,14 +110,16 @@ public class Character : Unit
     {
         // уменьшаем свойство иначе UI работать не будет
         Health--;
-        _rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
-        _rigidbody.AddForce(transform.up * 4, ForceMode2D.Impulse);
 
-        // перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
-        _sprite.color = Color.red;
-        Invoke(nameof(ColorWhite), 0.5F);
+        State = CharacterState.ReceiveDamage; // доработать
 
-        //Debug.Log(_health);
+        //_rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
+        //_rigidbody.AddForce(transform.up * 4, ForceMode2D.Impulse);
+
+        //// перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
+        //_sprite.color = Color.red;
+        //Invoke(nameof(ColorWhite), 0.5F);
+
         if (_health <= 0)
             Die();
     }
@@ -141,6 +144,8 @@ public class Character : Unit
         if (bullet && bullet.Parent != gameObject)
         {
             ReceiveDamage();
+            State = CharacterState.ReceiveDamage;
+
         }
     }
 }
