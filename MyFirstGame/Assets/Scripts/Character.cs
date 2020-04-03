@@ -12,13 +12,25 @@ public class Character : Unit
     [SerializeField] private float _speed = 3;
     [SerializeField] private float _jumpForce = 10;
     [SerializeField] private int _health = 5;
-
     private bool _isGround = false;
 
+    private LivesBar _livesBar;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private SpriteRenderer _sprite;
     private Bullet _bullet;
+
+    // свойство которое должно изменять количество жизней если оно изменяется
+    // метод Refresh() при изменении жизней просит обновить UI
+    public int Health
+    {
+        get { return _health; }
+        set
+        {
+            if(value < 5) _health = value;
+            _livesBar.Refresh();
+        }
+    }
 
     private CharacterState State
     {
@@ -28,6 +40,7 @@ public class Character : Unit
 
     private void Awake()
     {
+        _livesBar = FindObjectOfType<LivesBar>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
@@ -89,7 +102,8 @@ public class Character : Unit
 
     public override void ReceiveDamage()
     {
-        _health--;
+        // уменьшаем свойство иначе UI работать не будет
+        Health--;
         _rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
         _rigidbody.AddForce(transform.up * 4, ForceMode2D.Impulse);
 

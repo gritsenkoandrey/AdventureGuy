@@ -5,10 +5,12 @@ public class ShootableMonster : Monster
 {
     [SerializeField] private float _rate = 2.0F;
     private Bullet _bullet;
+    //private SpriteRenderer _sprite;
 
     protected override void Awake()
     {
         _bullet = Resources.Load<Bullet>("Bullet");
+        //_sprite = GetComponent<SpriteRenderer>(); - покрасить пулю противника в красный цвет
     }
 
     protected override void Start()
