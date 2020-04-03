@@ -5,12 +5,11 @@ public class ShootableMonster : Monster
 {
     [SerializeField] private float _rate = 2.0F;
     private Bullet _bullet;
-    //private SpriteRenderer _sprite;
+    private Color _bulletColor = Color.red;
 
     protected override void Awake()
     {
         _bullet = Resources.Load<Bullet>("Bullet");
-        //_sprite = GetComponent<SpriteRenderer>(); - покрасить пулю противника в красный цвет
     }
 
     protected override void Start()
@@ -23,8 +22,10 @@ public class ShootableMonster : Monster
         Vector3 position = transform.position;
         position.y += 0.2F;
         Bullet newBullet = Instantiate(_bullet, position, _bullet.transform.rotation) as Bullet;
+        
         newBullet.Parent = gameObject;
         newBullet.Direction = -newBullet.transform.right;
+        newBullet.Color = _bulletColor;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collider)

@@ -6,18 +6,24 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _speed = 10;
 
     private Vector3 _direction;
+    private SpriteRenderer _sprite;
+    private GameObject _parent;
+
     public Vector3 Direction
     {
         set { _direction = value; }
     }
-    private SpriteRenderer _sprite;
-
-    private GameObject _parent;
 
     public GameObject Parent
     {
         get { return _parent; }
         set { _parent = value; }
+    }
+
+    // свойство для окрашивания пули
+    public Color Color
+    {
+        set { _sprite.color = value; }
     }
 
     private void Awake()

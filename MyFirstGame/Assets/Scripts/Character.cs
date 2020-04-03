@@ -12,6 +12,7 @@ public class Character : Unit
     [SerializeField] private float _speed = 3;
     [SerializeField] private float _jumpForce = 10;
     [SerializeField] private int _health = 5;
+
     private bool _isGround = false;
 
     private LivesBar _livesBar;
@@ -24,10 +25,14 @@ public class Character : Unit
     // метод Refresh() при изменении жизней просит обновить UI
     public int Health
     {
-        get { return _health; }
+        get
+        {
+            return _health; 
+
+        }
         set
         {
-            if(value < 5) _health = value;
+            if(value <= 5) _health = value;
             _livesBar.Refresh();
         }
     }
