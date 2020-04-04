@@ -6,7 +6,7 @@ public enum CharacterState
     Idle = 0,
     Run = 1,
     Jump = 2,
-    ReceiveDamage = 3
+    Hit = 3
 }
 public class Character : Unit
 {
@@ -28,8 +28,7 @@ public class Character : Unit
     {
         get
         {
-            return _health; 
-
+            return _health;
         }
         set
         {
@@ -41,16 +40,16 @@ public class Character : Unit
     private CharacterState State
     {
         get { return (CharacterState)_animator.GetInteger("State"); }
-        set { _animator.SetInteger("State", (int)value);}
+        set { _animator.SetInteger("State", (int)value); }
     }
 
     private void Awake()
     {
-        _livesBar = FindObjectOfType<LivesBar>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
         _bullet = Resources.Load<Bullet>("Bullet");
+        _livesBar = FindObjectOfType<LivesBar>();
     }
 
     private void FixedUpdate()
@@ -107,19 +106,21 @@ public class Character : Unit
     }
 
     public override void ReceiveDamage()
-    {
+    {        
         // уменьшаем свойство иначе UI работать не будет
         Health--;
+        //State = CharacterState.Hit;
 
-        State = CharacterState.ReceiveDamage; // доработать
-
-        //_rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
-        //_rigidbody.AddForce(transform.up * 4, ForceMode2D.Impulse);
+        _rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
+        _rigidbody.AddForce(transform.up * 4, ForceMode2D.Impulse); // при получении урона отбрасывает вверх
 
         //// перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
-        //_sprite.color = Color.red;
-        //Invoke(nameof(ColorWhite), 0.5F);
-
+        _sprite.color = Color.red;
+        if(_sprite.color == Color.red)
+        {
+            State = CharacterState.Hit;
+        }
+        Invoke(nameof(ColorWhite), 1F);
         if (_health <= 0)
             Die();
     }
@@ -131,7 +132,7 @@ public class Character : Unit
 
     private void CheckGround()
     {
-        var colliders = Physics2D.OverlapCircleAll(transform.position, 0.8F);
+        var colliders = Physics2D.OverlapCircleAll(transform.position, 0.75F); //0.8F
         _isGround = colliders.Length > 1;
 
         // если мы не на земле, то проигрывается анимация Jump
@@ -144,8 +145,6 @@ public class Character : Unit
         if (bullet && bullet.Parent != gameObject)
         {
             ReceiveDamage();
-            State = CharacterState.ReceiveDamage;
-
         }
     }
 }

@@ -48,7 +48,7 @@ public class Bullet : MonoBehaviour
 
         if (unit && unit.gameObject != _parent)
         {
-            //unit.ReceiveDamage(); // если пуля не принадлежит созданному его объекту, то она наносит урон
+            // если пуля не принадлежит созданному его объекту, то она наносит урон
             Destroy(gameObject);
         }
     }
