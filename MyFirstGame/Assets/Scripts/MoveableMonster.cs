@@ -26,8 +26,6 @@ public class MoveableMonster : Monster
     {
         Move();
     }
-    #endregion
-
 
     protected override void OnTriggerEnter2D(Collider2D collider)
     {
@@ -41,7 +39,10 @@ public class MoveableMonster : Monster
             else unit.ReceiveDamage();
         }
     }
+    #endregion
 
+
+    #region Methods
     private void Move()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(
@@ -52,4 +53,5 @@ public class MoveableMonster : Monster
         transform.position = Vector3.MoveTowards(transform.position, 
                 transform.position + _direction, _speed * Time.deltaTime);
     }
+    #endregion
 }

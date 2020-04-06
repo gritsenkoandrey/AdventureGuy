@@ -48,8 +48,6 @@ public class Bullet : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position,
                 transform.position + _direction, _speed * Time.deltaTime);
     }
-    #endregion
-
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -61,4 +59,5 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    #endregion
 }

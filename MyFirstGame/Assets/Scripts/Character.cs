@@ -11,6 +11,8 @@ public enum CHARACTER_STATE
     Hit = 3
 }
 #endregion
+
+
 public class Character : Unit
 {
     #region Fields

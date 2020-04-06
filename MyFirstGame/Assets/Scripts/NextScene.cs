@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class NextScene : MonoBehaviour
 {
+    #region UnityMethods
     private void OnTriggerEnter2D(Collider2D nextLevelCollider)
     {
         var character = nextLevelCollider.GetComponent<Character>();
@@ -12,4 +13,5 @@ public class NextScene : MonoBehaviour
             SceneManager.LoadScene("YouWin");
         }
     }
+    #endregion
 }

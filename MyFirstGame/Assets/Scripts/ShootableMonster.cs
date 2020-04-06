@@ -21,19 +21,6 @@ public class ShootableMonster : Monster
     {
         InvokeRepeating(nameof(Shoot), _rate, _rate);
     }
-    #endregion
-
-
-    private void Shoot()
-    {
-        Vector3 position = transform.position;
-        position.y += 0.2F;
-        Bullet newBullet = Instantiate(_bullet, position, _bullet.transform.rotation) as Bullet;
-        
-        newBullet.Parent = gameObject;
-        newBullet.Direction = -newBullet.transform.right;
-        newBullet.Color = _bulletColor;
-    }
 
     protected override void OnTriggerEnter2D(Collider2D collider)
     {
@@ -47,4 +34,19 @@ public class ShootableMonster : Monster
             else unit.ReceiveDamage();
         }
     }
+    #endregion
+
+
+    #region Methods
+    private void Shoot()
+    {
+        Vector3 position = transform.position;
+        position.y += 0.2F;
+        Bullet newBullet = Instantiate(_bullet, position, _bullet.transform.rotation) as Bullet;
+        
+        newBullet.Parent = gameObject;
+        newBullet.Direction = -newBullet.transform.right;
+        newBullet.Color = _bulletColor;
+    }
+    #endregion
 }

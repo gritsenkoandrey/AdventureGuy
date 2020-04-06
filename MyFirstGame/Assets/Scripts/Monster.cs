@@ -18,8 +18,6 @@ public class Monster : Unit
     {
 
     }
-    #endregion
-
 
     protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
@@ -33,4 +31,5 @@ public class Monster : Unit
             unit.ReceiveDamage();
         }
     }
+    #endregion
 }
