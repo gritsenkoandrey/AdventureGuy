@@ -4,16 +4,22 @@
 public class ShootableMonster : Monster
 {
     #region Fields
+
     [SerializeField] private float _rate = 2.0F;
 
     private Bullet _bullet;
     private Color _bulletColor = Color.red;
+    private Vector3 _direction;
+    private SpriteRenderer _sprite;
+
     #endregion
 
 
     #region UnityMethods
+
     protected override void Awake()
     {
+        _sprite = GetComponent<SpriteRenderer>();
         _bullet = Resources.Load<Bullet>("Bullet");
     }
 
@@ -34,10 +40,12 @@ public class ShootableMonster : Monster
             else unit.ReceiveDamage();
         }
     }
+
     #endregion
 
 
     #region Methods
+
     private void Shoot()
     {
         Vector3 position = transform.position;
@@ -48,5 +56,6 @@ public class ShootableMonster : Monster
         newBullet.Direction = -newBullet.transform.right;
         newBullet.Color = _bulletColor;
     }
+
     #endregion
 }

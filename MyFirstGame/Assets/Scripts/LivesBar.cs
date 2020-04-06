@@ -4,13 +4,16 @@
 public class LivesBar : MonoBehaviour
 {
     #region Fields
+
     // создаем массив из 5 элементов (сердец)
     private Transform[] _hearts = new Transform[5];
     private Character _character;
+
     #endregion
 
 
     #region UnityMethods
+
     private void Awake()
     {
         _character = FindObjectOfType<Character>();
@@ -20,10 +23,12 @@ public class LivesBar : MonoBehaviour
             _hearts[i] = transform.GetChild(i);
         }
     }
+
     #endregion
 
 
     #region Methods
+
     // метод который будет изменять количество сердец
     public void Refresh()
     {
@@ -35,5 +40,6 @@ public class LivesBar : MonoBehaviour
                 _hearts[i].gameObject.SetActive(false);
         }
     }
+
     #endregion
 }

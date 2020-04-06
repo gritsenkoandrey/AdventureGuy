@@ -4,6 +4,7 @@
 public class Unit : MonoBehaviour
 {
     #region Methods
+
     public virtual void ReceiveDamage()
     {
         Die();
@@ -13,5 +14,6 @@ public class Unit : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
     #endregion
 }

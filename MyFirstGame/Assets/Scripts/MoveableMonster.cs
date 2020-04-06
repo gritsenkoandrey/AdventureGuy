@@ -5,14 +5,17 @@ using System.Linq;
 public class MoveableMonster : Monster
 {
     #region Fields
+
     [SerializeField] private float _speed = 2.0F;
 
     private SpriteRenderer _sprite;
     private Vector3 _direction;
+
     #endregion
 
 
     #region UnityMethods
+
     protected override void Awake()
     {
         _sprite = GetComponent<SpriteRenderer>();
@@ -39,10 +42,12 @@ public class MoveableMonster : Monster
             else unit.ReceiveDamage();
         }
     }
+
     #endregion
 
 
     #region Methods
+
     private void Move()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(
@@ -53,5 +58,6 @@ public class MoveableMonster : Monster
         transform.position = Vector3.MoveTowards(transform.position, 
                 transform.position + _direction, _speed * Time.deltaTime);
     }
+
     #endregion
 }

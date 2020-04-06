@@ -2,20 +2,10 @@
 using UnityEngine.SceneManagement;
 
 
-#region PrivateData
-public enum CHARACTER_STATE
-{
-    Idle = 0,
-    Run = 1,
-    Jump = 2,
-    Hit = 3
-}
-#endregion
-
-
 public class Character : Unit
 {
     #region Fields
+
     [SerializeField] private float _speed = 3;
     [SerializeField] private float _jumpForce = 10;
     [SerializeField] private int _health = 5;
@@ -27,10 +17,12 @@ public class Character : Unit
     private Animator _animator;
     private SpriteRenderer _sprite;
     private Bullet _bullet;
+
     #endregion
 
 
     #region Properities
+
     // свойство которое должно изменять количество жизней если оно изменяется
     // метод Refresh() при изменении жизней просит обновить UI
     public int Health
@@ -51,10 +43,12 @@ public class Character : Unit
         get { return (CHARACTER_STATE)_animator.GetInteger("State"); }
         set { _animator.SetInteger("State", (int)value); }
     }
+
     #endregion
 
 
     #region UnityMethods
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -87,10 +81,12 @@ public class Character : Unit
             ReceiveDamage();
         }
     }
+
     #endregion
 
 
     #region Methods
+
     private void Run()
     {
         if (Input.GetButton("Horizontal"))
@@ -159,5 +155,6 @@ public class Character : Unit
         // если мы не на земле, то проигрывается анимация Jump
         if (!_isGround) State = CHARACTER_STATE.Jump;
     }
+
     #endregion
 }

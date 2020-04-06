@@ -4,6 +4,7 @@
 public class Monster : Unit
 {
     #region UnityMethods
+
     protected virtual void Awake()
     {
 
@@ -31,5 +32,6 @@ public class Monster : Unit
             unit.ReceiveDamage();
         }
     }
+
     #endregion
 }

@@ -4,11 +4,13 @@
 public class Bullet : MonoBehaviour
 {
     #region Fields
+
     [SerializeField] private float _speed = 10;
 
     private Vector3 _direction;
     private SpriteRenderer _sprite;
     private GameObject _parent;
+
     #endregion
 
 
@@ -33,6 +35,7 @@ public class Bullet : MonoBehaviour
 
 
     #region UnityMethods
+
     private void Awake()
     {
         _sprite = GetComponent<SpriteRenderer>();
@@ -59,5 +62,6 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     #endregion
 }
