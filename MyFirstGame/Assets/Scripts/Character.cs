@@ -9,8 +9,10 @@ public class Character : Unit
     [SerializeField] private float _speed = 3;
     [SerializeField] private float _jumpForce = 10;
     [SerializeField] private int _health = 5;
+    private int _maxHealth = 5;
 
     private bool _isGround = false;
+    private bool _isPaused = false;
 
     private LivesBar _livesBar;
     private Rigidbody2D _rigidbody;
@@ -33,14 +35,14 @@ public class Character : Unit
         }
         set
         {
-            if(value <= 5) _health = value;
+            if(value <= _maxHealth) _health = value;
             _livesBar.Refresh();
         }
     }
 
-    private CHARACTER_STATE State
+    private CharacterState State
     {
-        get { return (CHARACTER_STATE)_animator.GetInteger("State"); }
+        get { return (CharacterState)_animator.GetInteger("State"); }
         set { _animator.SetInteger("State", (int)value); }
     }
 
@@ -67,11 +69,12 @@ public class Character : Unit
     {
         // когда стоим на твердой поверхности проигрывается анимация Idle
         if (_isGround)
-            State = CHARACTER_STATE.Idle;
+            State = CharacterState.Idle;
 
         Fire();
         Run();
         Jump();
+        GamePause();
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -98,7 +101,7 @@ public class Character : Unit
             _sprite.flipX = direction.x < 0;
 
             if (_isGround)
-                State = CHARACTER_STATE.Run;
+                State = CharacterState.Run;
         }
     }
 
@@ -153,7 +156,24 @@ public class Character : Unit
         _isGround = colliders.Length > 1;
 
         // если мы не на земле, то проигрывается анимация Jump
-        if (!_isGround) State = CHARACTER_STATE.Jump;
+        if (!_isGround) State = CharacterState.Jump;
+    }
+
+    private void GamePause()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (!_isPaused)
+            {
+                Time.timeScale = 0F;
+                _isPaused = true;
+            }
+            else
+            {
+                Time.timeScale = 1F;
+                _isPaused = false;
+            }
+        }
     }
 
     #endregion
