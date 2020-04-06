@@ -4,10 +4,15 @@ using System.Linq;
 
 public class MoveableMonster : Monster
 {
+    #region Fields
     [SerializeField] private float _speed = 2.0F;
+
     private SpriteRenderer _sprite;
     private Vector3 _direction;
+    #endregion
 
+
+    #region UnityMethods
     protected override void Awake()
     {
         _sprite = GetComponent<SpriteRenderer>();
@@ -21,6 +26,8 @@ public class MoveableMonster : Monster
     {
         Move();
     }
+    #endregion
+
 
     protected override void OnTriggerEnter2D(Collider2D collider)
     {

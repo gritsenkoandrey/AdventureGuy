@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
-public enum CharacterState
+#region PrivateData
+public enum CHARACTER_STATE
 {
     Idle = 0,
     Run = 1,
     Jump = 2,
     Hit = 3
 }
+#endregion
 public class Character : Unit
 {
+    #region Fields
     [SerializeField] private float _speed = 3;
     [SerializeField] private float _jumpForce = 10;
     [SerializeField] private int _health = 5;
@@ -21,7 +25,10 @@ public class Character : Unit
     private Animator _animator;
     private SpriteRenderer _sprite;
     private Bullet _bullet;
+    #endregion
 
+
+    #region Properities
     // свойство которое должно изменять количество жизней если оно изменяется
     // метод Refresh() при изменении жизней просит обновить UI
     public int Health
@@ -37,12 +44,15 @@ public class Character : Unit
         }
     }
 
-    private CharacterState State
+    private CHARACTER_STATE State
     {
-        get { return (CharacterState)_animator.GetInteger("State"); }
+        get { return (CHARACTER_STATE)_animator.GetInteger("State"); }
         set { _animator.SetInteger("State", (int)value); }
     }
+    #endregion
 
+
+    #region UnityMethods
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -61,13 +71,24 @@ public class Character : Unit
     {
         // когда стоим на твердой поверхности проигрывается анимация Idle
         if (_isGround)
-            State = CharacterState.Idle;
+            State = CHARACTER_STATE.Idle;
 
         Fire();
         Run();
         Jump();
     }
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Bullet bullet = collider.gameObject.GetComponent<Bullet>();
+        if (bullet && bullet.Parent != gameObject)
+        {
+            ReceiveDamage();
+        }
+    }
+    #endregion
 
+
+    #region Methods
     private void Run()
     {
         if (Input.GetButton("Horizontal"))
@@ -79,7 +100,7 @@ public class Character : Unit
             _sprite.flipX = direction.x < 0;
 
             if (_isGround)
-                State = CharacterState.Run;
+                State = CHARACTER_STATE.Run;
         }
     }
 
@@ -106,23 +127,21 @@ public class Character : Unit
     }
 
     public override void ReceiveDamage()
-    {        
+    {
+        //State = CHARACTER_STATE.Hit;
         // уменьшаем свойство иначе UI работать не будет
         Health--;
-        //State = CharacterState.Hit;
-
         _rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
         _rigidbody.AddForce(transform.up * 4, ForceMode2D.Impulse); // при получении урона отбрасывает вверх
 
         //// перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
         _sprite.color = Color.red;
-        if(_sprite.color == Color.red)
-        {
-            State = CharacterState.Hit;
-        }
         Invoke(nameof(ColorWhite), 1F);
         if (_health <= 0)
+        {
             Die();
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     private void ColorWhite()
@@ -136,15 +155,7 @@ public class Character : Unit
         _isGround = colliders.Length > 1;
 
         // если мы не на земле, то проигрывается анимация Jump
-        if (!_isGround) State = CharacterState.Jump;
+        if (!_isGround) State = CHARACTER_STATE.Jump;
     }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        Bullet bullet = collider.gameObject.GetComponent<Bullet>();
-        if (bullet && bullet.Parent != gameObject)
-        {
-            ReceiveDamage();
-        }
-    }
+    #endregion
 }

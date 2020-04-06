@@ -3,9 +3,9 @@
 
 public class Heart : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnTriggerEnter2D(Collider2D healthCollider)
     {
-        Character character = collider.GetComponent<Character>();
+        var character = healthCollider.GetComponent<Character>();
         if (character)
         {
             character.Health = character.Health + 1;

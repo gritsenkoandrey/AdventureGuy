@@ -3,10 +3,15 @@
 
 public class ShootableMonster : Monster
 {
+    #region Fields
     [SerializeField] private float _rate = 2.0F;
+
     private Bullet _bullet;
     private Color _bulletColor = Color.red;
+    #endregion
 
+
+    #region UnityMethods
     protected override void Awake()
     {
         _bullet = Resources.Load<Bullet>("Bullet");
@@ -16,6 +21,8 @@ public class ShootableMonster : Monster
     {
         InvokeRepeating(nameof(Shoot), _rate, _rate);
     }
+    #endregion
+
 
     private void Shoot()
     {

@@ -3,12 +3,16 @@
 
 public class Bullet : MonoBehaviour
 {
+    #region Fields
     [SerializeField] private float _speed = 10;
 
     private Vector3 _direction;
     private SpriteRenderer _sprite;
     private GameObject _parent;
+    #endregion
 
+
+    #region Properities
     public Vector3 Direction
     {
         set { _direction = value; }
@@ -25,7 +29,10 @@ public class Bullet : MonoBehaviour
     {
         set { _sprite.color = value; }
     }
+    #endregion
 
+
+    #region UnityMethods
     private void Awake()
     {
         _sprite = GetComponent<SpriteRenderer>();
@@ -41,10 +48,12 @@ public class Bullet : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position,
                 transform.position + _direction, _speed * Time.deltaTime);
     }
+    #endregion
+
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Unit unit = collider.GetComponent<Unit>();
+        var unit = collider.GetComponent<Unit>();
 
         if (unit && unit.gameObject != _parent)
         {

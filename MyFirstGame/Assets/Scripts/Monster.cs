@@ -3,6 +3,7 @@
 
 public class Monster : Unit
 {
+    #region UnityMethods
     protected virtual void Awake()
     {
 
@@ -17,14 +18,16 @@ public class Monster : Unit
     {
 
     }
+    #endregion
+
 
     protected virtual void OnTriggerEnter2D(Collider2D collider)
     {
-        Bullet bullet = collider.GetComponent<Bullet>();
+        var bullet = collider.GetComponent<Bullet>();
         if (bullet)
             ReceiveDamage();
 
-        Unit unit = collider.GetComponent<Unit>();
+        var unit = collider.GetComponent<Unit>();
         if (unit && unit as Character)
         {
             unit.ReceiveDamage();
