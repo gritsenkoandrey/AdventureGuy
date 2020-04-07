@@ -40,6 +40,12 @@ public class Character : Unit
         }
     }
 
+    public float JumpForce
+    {
+        get { return _jumpForce; }
+        set { _jumpForce = value; }
+    }
+
     private CharacterState State
     {
         get { return (CharacterState)_animator.GetInteger("State"); }
@@ -70,8 +76,6 @@ public class Character : Unit
         // когда стоим на твердой поверхности проигрывается анимация Idle
         if (_isGround)
             State = CharacterState.Idle;
-
-        //Invoke(nameof(HitAnime), 1F); // дичь
 
         Fire();
         Run();
@@ -177,13 +181,6 @@ public class Character : Unit
             }
         }
     }
-
-    // Дичь
-    //private void HitAnime()
-    //{
-    //    if (_currentHealth < _maxHealth)
-    //        State = CharacterState.Hit;
-    //}
 
     #endregion
 }

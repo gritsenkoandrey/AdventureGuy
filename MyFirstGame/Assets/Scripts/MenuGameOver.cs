@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuGameOver : MonoBehaviour
 {
-    public void PlayPressed()
+    public void MenuPressed()
     {
         SceneManager.LoadScene("Menu");
     }
