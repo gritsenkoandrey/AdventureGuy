@@ -6,9 +6,9 @@ public class Character : Unit
 {
     #region Fields
 
-    [SerializeField] private float _speed = 3;
-    [SerializeField] private float _jumpForce = 10;
-    [SerializeField] private int _health = 5;
+    [SerializeField] private float _speed = 4F;
+    [SerializeField] private float _jumpForce = 6.5F;
+    private int _currentHealth = 5;
     private int _maxHealth = 5;
 
     private bool _isGround = false;
@@ -31,11 +31,11 @@ public class Character : Unit
     {
         get
         {
-            return _health;
+            return _currentHealth;
         }
         set
         {
-            if(value <= _maxHealth) _health = value;
+            if(value <= _maxHealth) _currentHealth = value;
             _livesBar.Refresh();
         }
     }
@@ -71,6 +71,8 @@ public class Character : Unit
         if (_isGround)
             State = CharacterState.Idle;
 
+        //Invoke(nameof(HitAnime), 1F); // дичь
+
         Fire();
         Run();
         Jump();
@@ -78,7 +80,7 @@ public class Character : Unit
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Bullet bullet = collider.gameObject.GetComponent<Bullet>();
+        var bullet = collider.gameObject.GetComponent<Bullet>();
         if (bullet && bullet.Parent != gameObject)
         {
             ReceiveDamage();
@@ -119,7 +121,7 @@ public class Character : Unit
         {
             Vector3 position = transform.position;
             position.y += 0;
-            Bullet newBullet = Instantiate(_bullet, position, _bullet.transform.rotation) as Bullet;
+            var newBullet = Instantiate(_bullet, position, _bullet.transform.rotation);
             // при стрельбе мы являемся родителем пули и она не уничтожается
             newBullet.Parent = gameObject;
             // задаем направление движения созданной пули
@@ -138,7 +140,7 @@ public class Character : Unit
         //// перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
         _sprite.color = Color.red;
         Invoke(nameof(ColorWhite), 1F);
-        if (_health <= 0)
+        if (_currentHealth <= 0)
         {
             Die();
             SceneManager.LoadScene("GameOver");
@@ -175,6 +177,13 @@ public class Character : Unit
             }
         }
     }
+
+    // Дичь
+    //private void HitAnime()
+    //{
+    //    if (_currentHealth < _maxHealth)
+    //        State = CharacterState.Hit;
+    //}
 
     #endregion
 }
