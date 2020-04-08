@@ -15,6 +15,7 @@ public class Bullet : MonoBehaviour
 
 
     #region Properities
+
     public Vector3 Direction
     {
         set { _direction = value; }
@@ -31,6 +32,7 @@ public class Bullet : MonoBehaviour
     {
         set { _sprite.color = value; }
     }
+
     #endregion
 
 

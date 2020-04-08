@@ -6,11 +6,20 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
+    #region Fields
+
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private Dropdown _dropdown;
+
     private Resolution[] _resolution;
     private List<string> _resolutionsList;
+
     private bool _isFullScreen;
+
+    #endregion
+
+
+    #region UnityMethod
 
     private void Awake()
     {
@@ -25,6 +34,10 @@ public class Settings : MonoBehaviour
         _dropdown.AddOptions(_resolutionsList); // записываем разрешение в список
     }
 
+    #endregion
+
+
+    #region Method
     // метод управления разрешением экрана
     public void FullScreenToggle()
     {
@@ -49,4 +62,6 @@ public class Settings : MonoBehaviour
     {
         Screen.SetResolution(_resolution[r].width, _resolution[r].height, _isFullScreen);
     }
+
+    #endregion
 }

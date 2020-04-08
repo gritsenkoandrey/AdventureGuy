@@ -8,6 +8,9 @@ public class Character : Unit
 
     [SerializeField] private float _speed = 4F;
     [SerializeField] private float _jumpForce = 6.5F;
+
+    private float _plusJumpForce = 2F;
+
     private int _currentHealth = 5;
     private int _maxHealth = 5;
 
@@ -29,13 +32,11 @@ public class Character : Unit
     // метод Refresh() при изменении жизней просит обновить UI
     public int Health
     {
-        get
-        {
-            return _currentHealth;
-        }
+        get { return _currentHealth; }
         set
         {
-            if(value <= _maxHealth) _currentHealth = value;
+            if(value <= _maxHealth)
+                _currentHealth = value;
             _livesBar.Refresh();
         }
     }
@@ -43,7 +44,11 @@ public class Character : Unit
     public float JumpForce
     {
         get { return _jumpForce; }
-        set { _jumpForce = value; }
+        set
+        {
+            if (_jumpForce < value) _jumpForce = value;
+            Invoke(nameof(NormalJumpForce), 3.0F);
+        }
     }
 
     private CharacterState State
@@ -180,6 +185,12 @@ public class Character : Unit
                 _isPaused = false;
             }
         }
+    }
+
+    private void NormalJumpForce()
+    {
+        _jumpForce -= _plusJumpForce;
+        Debug.Log("Jump is normal");
     }
 
     #endregion

@@ -32,7 +32,7 @@ public class ShootableMonster : Monster
     {
         // этого монстра можно убить только прыгнув на него сверху
         // Mathf.Abs - модуль числа, если мы заходим слева при Х = -число, то модуль Х = +число
-        Unit unit = collider.GetComponent<Unit>();
+        var unit = collider.GetComponent<Unit>();
         if (unit && unit as Character)
         {
             if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.5F)
@@ -50,7 +50,7 @@ public class ShootableMonster : Monster
     {
         Vector3 position = transform.position;
         position.y += 0.2F;
-        Bullet newBullet = Instantiate(_bullet, position, _bullet.transform.rotation) as Bullet;
+        var newBullet = Instantiate(_bullet, position, _bullet.transform.rotation);
         
         newBullet.Parent = gameObject;
         newBullet.Direction = -newBullet.transform.right;

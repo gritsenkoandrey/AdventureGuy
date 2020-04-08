@@ -8,7 +8,6 @@ public class MoveableMonster : Monster
 
     [SerializeField] private float _speed = 2.0F;
 
-    private SpriteRenderer _sprite;
     private Vector3 _direction;
 
     #endregion
@@ -16,10 +15,6 @@ public class MoveableMonster : Monster
 
     #region UnityMethods
 
-    protected override void Awake()
-    {
-        _sprite = GetComponent<SpriteRenderer>();
-    }
     protected override void Start()
     {
         _direction = transform.right;
@@ -34,7 +29,7 @@ public class MoveableMonster : Monster
     {
         // этого монстра можно убить только прыгнув на него сверху
         // Mathf.Abs - модуль числа, если мы заходим слева при Х = -число, то модуль Х = +число
-        Unit unit = collider.GetComponent<Unit>();
+        var unit = collider.GetComponent<Unit>();
         if (unit && unit as Character)
         {
             if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.5F)

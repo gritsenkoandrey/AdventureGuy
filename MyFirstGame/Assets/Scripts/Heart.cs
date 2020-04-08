@@ -3,6 +3,13 @@
 
 public class Heart : MonoBehaviour
 {
+    #region Fields
+
+    private int _healthPlus = 1;
+
+    #endregion
+
+
     #region UnityMethods
 
     private void OnTriggerEnter2D(Collider2D healthCollider)
@@ -10,7 +17,7 @@ public class Heart : MonoBehaviour
         var character = healthCollider.GetComponent<Character>();
         if (character)
         {
-            character.Health = character.Health + 1;
+            character.Health = character.Health + _healthPlus;
             Destroy(gameObject);
         }
     }

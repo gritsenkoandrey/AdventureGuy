@@ -4,8 +4,8 @@ public class PowerJump : MonoBehaviour
 {
     #region Fields
 
-    private float _bonusJumpForce = 2F;
-    private float _normalJumpForce = 6.5F;
+    private float _plusJumpForce = 2F;
+
     private Character _character;
 
     #endregion
@@ -13,30 +13,13 @@ public class PowerJump : MonoBehaviour
 
     #region UnityMethods
 
-    private void OnTriggerEnter2D(Collider2D jump)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        _character = jump.GetComponent<Character>();
-        _character.JumpForce += _bonusJumpForce;
-        Invoke(nameof(NormalJumpForce), 1F);
+        _character = collider.GetComponent<Character>();
+        _character.JumpForce += _plusJumpForce;
         Destroy(gameObject);
-
-        //if (_character)
-        //{
-        //    _character.JumpForce += _bonusJumpForce;
-        //    Invoke(nameof(NormalJumpForce), 1F);
-        //    Destroy(gameObject);
-        //}
     }
 
     #endregion
 
-    #region Methods
-    private void NormalJumpForce()
-    {
-        //_character = GetComponent<Character>();
-        _character.JumpForce = _normalJumpForce;
-        Debug.Log("Jump");
-    }
-
-    #endregion
 }
