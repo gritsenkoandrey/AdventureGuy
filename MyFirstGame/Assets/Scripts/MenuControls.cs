@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class MenuControls : MonoBehaviour
 {
     #region Method
+
     public void PlayPressed()
     {
-        SceneManager.LoadScene("Level-1");
+        SceneManager.LoadScene(4);
     }
 
     public void ExitPressed()

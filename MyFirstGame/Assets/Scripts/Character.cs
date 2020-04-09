@@ -154,7 +154,7 @@ public class Character : Unit
         if (_currentHealth <= 0)
         {
             Die();
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(3);
         }
     }
 

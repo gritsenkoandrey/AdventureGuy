@@ -7,7 +7,7 @@ public class MenuGameOver : MonoBehaviour
 
     public void MenuPressed()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(1);
     }
 
     public void ExitPressed()

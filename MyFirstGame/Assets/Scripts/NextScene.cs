@@ -4,6 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class NextScene : MonoBehaviour
 {
+    #region Fields
+
+    [SerializeField] private int _loadingScene;
+
+    #endregion
+
+
     #region UnityMethods
 
     private void OnTriggerEnter2D(Collider2D nextLevelCollider)
@@ -11,7 +18,7 @@ public class NextScene : MonoBehaviour
         var character = nextLevelCollider.GetComponent<Character>();
         if(character)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(_loadingScene);
         }
     }
 
