@@ -87,6 +87,7 @@ public class Character : Unit
         Jump();
         GamePause();
     }
+
     private void OnTriggerEnter2D(Collider2D collider)
     {
         var bullet = collider.gameObject.GetComponent<Bullet>();
@@ -140,19 +141,20 @@ public class Character : Unit
 
     public override void ReceiveDamage()
     {
-        //State = CHARACTER_STATE.Hit;
-        // уменьшаем свойство иначе UI работать не будет
+        State = CharacterState.Hit;
+        //_animator.SetInteger("State", 3);
+
         Health--;
         _rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
         _rigidbody.AddForce(transform.up * 4, ForceMode2D.Impulse); // при получении урона отбрасывает вверх
 
-        //// перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
+        // перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
         _sprite.color = Color.red;
         Invoke(nameof(ColorWhite), 1F);
         if (_currentHealth <= 0)
         {
             Die();
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene(2);
         }
     }
 

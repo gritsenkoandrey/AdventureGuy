@@ -11,7 +11,7 @@ public class NextScene : MonoBehaviour
         var character = nextLevelCollider.GetComponent<Character>();
         if(character)
         {
-            SceneManager.LoadScene("YouWin");
+            SceneManager.LoadScene(1);
         }
     }
 

@@ -21,5 +21,4 @@ public class PowerJump : MonoBehaviour
     }
 
     #endregion
-
 }
