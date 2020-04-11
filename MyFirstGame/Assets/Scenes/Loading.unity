@@ -450,12 +450,12 @@ PrefabInstance:
     - target: {fileID: 7922073523530141213, guid: d487542c8ded60b49872ea34521a585c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: -614
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7922073523530141213, guid: d487542c8ded60b49872ea34521a585c,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -302
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7922073523530141213, guid: d487542c8ded60b49872ea34521a585c,
         type: 3}
@@ -491,6 +491,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LoadingScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 7922073524427313961, guid: d487542c8ded60b49872ea34521a585c,
+        type: 3}
+      propertyPath: m_FillAmount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d487542c8ded60b49872ea34521a585c, type: 3}

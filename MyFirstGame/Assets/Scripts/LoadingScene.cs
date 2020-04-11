@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -21,7 +20,7 @@ public class LoadingScene : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(AsyncLoad()); // запуск куратины
+        StartCoroutine(AsyncLoad());
     }
 
     #endregion
@@ -32,7 +31,8 @@ public class LoadingScene : MonoBehaviour
     private IEnumerator AsyncLoad()
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(_loadingScene); // загружаем сцену
-        while(!operation.isDone) // пока операция не завершена обновляем прогресс
+
+        while (!operation.isDone) // пока операция не завершена обновляем прогресс
         {
             float progress = operation.progress / 0.9F; // для того чтобы кружок прогресса доходил до конца
             _loadingImage.fillAmount = operation.progress; // обращаемся в загруженной картинке к полю Fill Amount
