@@ -15,13 +15,14 @@ public class Character : Unit
     private int _maxHealth = 5;
 
     private bool _isGround = false;
-    private bool _isPaused = false;
 
     private LivesBar _livesBar;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private SpriteRenderer _sprite;
     private Bullet _bullet;
+
+    private Vector3 _direction;
 
     #endregion
 
@@ -105,10 +106,11 @@ public class Character : Unit
     {
         if (Input.GetButton("Horizontal"))
         {
-            Vector3 direction = transform.right * Input.GetAxis("Horizontal");
-            transform.position = Vector3.MoveTowards(transform.position,
-                transform.position + direction, _speed * Time.deltaTime);
+            var direction = transform.right * Input.GetAxis("Horizontal");
+            var speed = _speed * Time.deltaTime;
+            var position = transform.position;
 
+            transform.position = Vector3.MoveTowards(position, transform.position + direction, speed);
             _sprite.flipX = direction.x < 0;
 
             if (_isGround)
@@ -128,20 +130,31 @@ public class Character : Unit
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Vector3 position = transform.position;
-            position.y += 0;
+            _direction = transform.right * (_sprite.flipX ? -1 : 1);
+            var position = transform.position;
+
+            if (_direction.x > 0)
+            {
+                position.x += 1;
+            }
+            else
+            {
+                position.x -= 1;
+            }
+
             var newBullet = Instantiate(_bullet, position, _bullet.transform.rotation);
-            // при стрельбе мы являемся родителем пули и она не уничтожается
-            newBullet.Parent = gameObject;
-            // задаем направление движения созданной пули
+
+            // при стрельбе мы являемся родителем пули и она нас не бьет
+            //newBullet.Parent = gameObject;
+
+            //задаем направление движения созданной пули
             newBullet.Direction = newBullet.transform.right * (_sprite.flipX ? -1 : 1);
         }
     }
 
     public override void ReceiveDamage()
     {
-        State = CharacterState.Hit;
-        //_animator.SetInteger("State", 3);
+        //State = CharacterState.Hit;
 
         Health--;
         _rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
@@ -174,7 +187,6 @@ public class Character : Unit
     private void NormalJumpForce()
     {
         _jumpForce -= _plusJumpForce;
-        Debug.Log("Jump is normal");
     }
 
     #endregion

@@ -39,7 +39,6 @@ public class DialogManager : MonoBehaviour
         _animatorStartDialog.SetBool("isStart", true);
 
         _nameText.text = dialog._name;
-
         _sentences.Clear();
         foreach(string sentence in dialog._sentences)
         {
@@ -84,5 +83,4 @@ public class DialogManager : MonoBehaviour
     }
 
     #endregion
-
 }

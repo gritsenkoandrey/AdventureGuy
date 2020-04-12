@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float _speed = 10;
 
     private Vector3 _direction;
+
     private SpriteRenderer _sprite;
     private GameObject _parent;
 
@@ -18,6 +19,7 @@ public class Bullet : MonoBehaviour
 
     public Vector3 Direction
     {
+        get { return _direction; }
         set { _direction = value; }
     }
 
