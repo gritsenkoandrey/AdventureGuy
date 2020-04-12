@@ -26,10 +26,12 @@ public class Settings : MonoBehaviour
         // для изменения разрешения
         _resolutionsList = new List<string>(); // создаем новый список
         _resolution = Screen.resolutions; // получаем разрешения
+
         foreach(var i in _resolution)
         {
             _resolutionsList.Add(i.width +"x"+ i.height); // пробегаем по массиву из полученных разрешений
         }
+
         _dropdown.ClearOptions(); // очищаем список dropdown
         _dropdown.AddOptions(_resolutionsList); // записываем разрешение в список
     }

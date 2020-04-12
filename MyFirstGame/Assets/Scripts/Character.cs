@@ -85,7 +85,6 @@ public class Character : Unit
         Fire();
         Run();
         Jump();
-        GamePause();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -170,23 +169,6 @@ public class Character : Unit
 
         // если мы не на земле, то проигрывается анимация Jump
         if (!_isGround) State = CharacterState.Jump;
-    }
-
-    private void GamePause()
-    {
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            if (!_isPaused)
-            {
-                Time.timeScale = 0F;
-                _isPaused = true;
-            }
-            else
-            {
-                Time.timeScale = 1F;
-                _isPaused = false;
-            }
-        }
     }
 
     private void NormalJumpForce()
