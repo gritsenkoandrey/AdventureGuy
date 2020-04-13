@@ -17,7 +17,11 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         // если цель не выбрана, то находит тип персонажа и следит за ним
-        if (!_target) _target = FindObjectOfType<Character>().transform;
+        if (!_target)
+        {
+            _target = GameObject.FindGameObjectWithTag("Player").transform;
+            //_target = FindObjectOfType<Character>().transform;
+        }
     }
 
     private void Update()
