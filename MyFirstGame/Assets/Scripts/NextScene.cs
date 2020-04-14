@@ -18,8 +18,18 @@ public class NextScene : MonoBehaviour
         var character = nextLevelCollider.GetComponent<Character>();
         if(character)
         {
-            SceneManager.LoadScene(_loadingScene);
+            character.AudioGetCoin();
+
+
+
+
+            Invoke(nameof(LoadScene), 0.5f);
         }
+    }
+
+    private void LoadScene()
+    {
+        SceneManager.LoadScene(_loadingScene);
     }
 
     #endregion

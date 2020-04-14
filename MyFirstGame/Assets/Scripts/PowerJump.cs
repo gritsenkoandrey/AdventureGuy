@@ -16,8 +16,12 @@ public class PowerJump : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collider)
     {
         _character = collider.GetComponent<Character>();
-        _character.JumpForce += _plusJumpForce;
-        Destroy(gameObject);
+        if(_character)
+        {
+            _character.JumpForce += _plusJumpForce;
+            _character.AudioGetPowerJump();
+            Destroy(gameObject);
+        }
     }
 
     #endregion

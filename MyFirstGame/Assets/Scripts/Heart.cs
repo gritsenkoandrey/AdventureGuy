@@ -18,6 +18,7 @@ public class Heart : MonoBehaviour
         if (character)
         {
             character.Health = character.Health + _healthPlus;
+            character.AudioGetHearth();
             Destroy(gameObject);
         }
     }
