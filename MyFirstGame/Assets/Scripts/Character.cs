@@ -154,7 +154,7 @@ public class Character : Unit
 
     public override void ReceiveDamage()
     {
-        //State = CharacterState.Hit;
+        State = CharacterState.Hit;
 
         Health--;
         _rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
