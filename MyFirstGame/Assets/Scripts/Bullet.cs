@@ -5,7 +5,7 @@ public class Bullet : MonoBehaviour
 {
     #region Fields
 
-    [SerializeField] private float _speed = 10;
+    [SerializeField] private float _speed = 10.0f;
 
     private Vector3 _direction;
 
@@ -47,7 +47,7 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, 1.5F);
+        Destroy(gameObject, 1.5f);
     }
 
     private void Update()

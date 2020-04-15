@@ -294,6 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 4
   _jumpForce: 6.5
+  _bullet: {fileID: 1221137602271764587, guid: e230164472de3a643a9638e154d694f4, type: 3}
   _audioClipBulletShot: {fileID: 8300000, guid: 48e387272fb1e724d92e57c1c9330251,
     type: 3}
   _audioClipJumpCharacter: {fileID: 8300000, guid: 62505b88485933f42b675f472a9f699f,

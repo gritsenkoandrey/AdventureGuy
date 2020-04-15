@@ -4,7 +4,7 @@ public class PowerJump : MonoBehaviour
 {
     #region Fields
 
-    private float _plusJumpForce = 2F;
+    private float _plusJumpForce = 2.0F;
 
     private Character _character;
 

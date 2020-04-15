@@ -7,18 +7,20 @@ public class Heart : MonoBehaviour
 
     private int _healthPlus = 1;
 
+    private Character _character;
+
     #endregion
 
 
     #region UnityMethods
 
-    private void OnTriggerEnter2D(Collider2D healthCollider)
+    private void OnTriggerEnter2D(Collider2D heart)
     {
-        var character = healthCollider.GetComponent<Character>();
-        if (character)
+        _character = heart.GetComponent<Character>();
+        if (_character)
         {
-            character.Health = character.Health + _healthPlus;
-            character.AudioGetHearth();
+            _character.Health = _character.Health + _healthPlus;
+            _character.AudioGetHearth();
             Destroy(gameObject);
         }
     }

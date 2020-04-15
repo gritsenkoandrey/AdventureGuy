@@ -43,7 +43,7 @@ public class GamePauseMenu : MonoBehaviour
     public void Resume()
     {
         _pauseMenuUI.SetActive(false); // во время продолжения игры меню не должно отображаться
-        Time.timeScale = 1.0F;
+        Time.timeScale = 1.0f;
         _isPaused = false;
     }
 
@@ -51,13 +51,13 @@ public class GamePauseMenu : MonoBehaviour
     {
         // говорит о том, что это будут кнопки и мы должны с ними как то взаимодействовать
         _pauseMenuUI.SetActive(true); // во время паузы это меню должно появляться
-        Time.timeScale = 0F;
+        Time.timeScale = 0f;
         _isPaused = true;
     }
 
     public void LoadMainMenu()
     {
-        Time.timeScale = 1.0F; // для того чтобы время начало двигаться дальше
+        Time.timeScale = 1.0f; // для того чтобы время начало двигаться дальше
         SceneManager.LoadScene(1);
     }
 
