@@ -3,6 +3,8 @@
 
 public class PatrolMonster : MonoBehaviour
 {
+    #region Fields
+
     // скорость передвижения противника
     [SerializeField] private float _speed;
     // растояние от противника до игрока
@@ -21,6 +23,11 @@ public class PatrolMonster : MonoBehaviour
     [SerializeField] private Transform _point;
     // расположение игрока
     private Transform _player;
+
+    #endregion
+
+
+    #region Unitymethod
 
     private void Start()
     {
@@ -49,20 +56,25 @@ public class PatrolMonster : MonoBehaviour
             _isAngry = false;
         }
 
-        // состояния нужны для исключения конфликтов, чтобы противник не дергался на месте
-        if (_isIdle == true)
-        {
-            Idle();
-        }
-        else if (_isAngry == true)
-        {
-            Angry();
-        }
-        else if (_isGoBackPoint == true)
-        {
-            GoBackPoint();
-        }
+        State();
+        //// состояния нужны для исключения конфликтов, чтобы противник не дергался на месте
+        //if (_isIdle == true)
+        //{
+        //    Idle();
+        //}
+        //else if (_isAngry == true)
+        //{
+        //    Angry();
+        //}
+        //else if (_isGoBackPoint == true)
+        //{
+        //    GoBackPoint();
+        //}
     }
+
+    #endregion
+
+    #region Method
 
     private void Idle()
     {
@@ -100,4 +112,23 @@ public class PatrolMonster : MonoBehaviour
     {
         transform.position = Vector2.MoveTowards(transform.position, _point.position, _speed * Time.deltaTime);
     }
+
+    private void State()
+    {
+        // состояния нужны для исключения конфликтов, чтобы противник не дергался на месте
+        if (_isIdle == true)
+        {
+            Idle();
+        }
+        else if (_isAngry == true)
+        {
+            Angry();
+        }
+        else if (_isGoBackPoint == true)
+        {
+            GoBackPoint();
+        }
+    }
+
+    #endregion
 }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 
@@ -7,9 +8,10 @@ public class Coin : MonoBehaviour
     #region Fields
 
     [SerializeField] private int _loadingScene;
-    private float _timeLoadindScene = 1.0f;
+    private float _timeLoadindScene = 0.3f;
 
     private Character _character;
+    //public UnityEvent _event;
 
     #endregion
 
@@ -22,8 +24,10 @@ public class Coin : MonoBehaviour
         if(_character)
         {
             _character.AudioGetCoin();
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            //_character.Coin++;
             Invoke(nameof(Scene), _timeLoadindScene);
+            //Destroy(gameObject);
+            //gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 
@@ -32,7 +36,7 @@ public class Coin : MonoBehaviour
 
     #region Method
 
-    private void Scene()
+    public void Scene()
     {
         SceneManager.LoadScene(_loadingScene);
     }

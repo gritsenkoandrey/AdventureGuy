@@ -23,8 +23,11 @@ public class Character : Unit
     private SpriteRenderer _sprite;
     private Bullet _bullet;
 
+    //private AudioSound _audioSound;
+
     private AudioSource _audio;
-    [SerializeField] private AudioClip _audioClipBulletShot;
+
+    [SerializeField] private AudioClip _audioClipBulletCharacter;
     [SerializeField] private AudioClip _audioClipJumpCharacter;
     [SerializeField] private AudioClip _audioClipHeart;
     [SerializeField] private AudioClip _audioClipJumpForce;
@@ -41,7 +44,10 @@ public class Character : Unit
     // метод Refresh() при изменении жизней просит обновить UI
     internal int Health
     {
-        get { return _currentHealth; }
+        get 
+        {
+            return _currentHealth;
+        }
         set
         {
             if(value <= _maxHealth)
@@ -50,15 +56,40 @@ public class Character : Unit
         }
     }
 
+    //internal int Hearth
+    //{
+    //    get 
+    //    { 
+    //        _audioSound.AudioGetHearth();
+    //        return 0;
+    //    }
+    //    set => value = Hearth;
+    //}
+
     internal float JumpForce
     {
-        get { return _jumpForce; }
+        get 
+        {
+            //_audioSound.AudioGetPowerJump();
+            return _jumpForce; 
+        }
         set
         {
-            if (_jumpForce < value) _jumpForce = value;
+            if (_jumpForce < value)
+                _jumpForce = value;
             Invoke(nameof(NormalJumpForce), _timeJumpForce);
         }
     }
+
+    //internal int Coin
+    //{
+    //    get 
+    //    {
+    //        //_audioSound.AudioGetCoin();
+    //        return 0;
+    //    }
+    //    set => value = Coin;
+    //}
 
     private CharacterState State
     {
@@ -77,6 +108,7 @@ public class Character : Unit
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
         _audio = GetComponent<AudioSource>();
+        //_audioSound = GetComponent<AudioSound>();
         _bullet = Resources.Load<Bullet>("Bullet");
         _livesBar = FindObjectOfType<LivesBar>();
     }
@@ -134,6 +166,7 @@ public class Character : Unit
             _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
 
             _audio.PlayOneShot(_audioClipJumpCharacter);
+            //_audioSound.AudioJumpCharacter();
         }
     }
 
@@ -161,13 +194,14 @@ public class Character : Unit
             //задаем направление движения созданной пули
             newBullet.Direction = newBullet.transform.right * (_sprite.flipX ? -1 : 1);
 
-            _audio.PlayOneShot(_audioClipBulletShot);
+            _audio.PlayOneShot(_audioClipBulletCharacter);
+            //_audioSound.AudioBulletCharacter();
         }
     }
 
     public override void ReceiveDamage()
     {
-        State = CharacterState.Hit;
+        //State = CharacterState.Hit;
 
         Health--;
         _rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
@@ -175,7 +209,7 @@ public class Character : Unit
 
         // перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
         _sprite.color = Color.red;
-        Invoke(nameof(ColorWhite), 1F);
+        Invoke(nameof(ColorWhite), 1f);
         if (_currentHealth <= 0)
         {
             Die();
@@ -190,7 +224,7 @@ public class Character : Unit
 
     private void CheckGround()
     {
-        var colliders = Physics2D.OverlapCircleAll(transform.position, 0.75F); //0.8F
+        var colliders = Physics2D.OverlapCircleAll(transform.position, 0.75f); //0.8F
         _isGround = colliders.Length > 1;
 
         // если мы не на земле, то проигрывается анимация Jump

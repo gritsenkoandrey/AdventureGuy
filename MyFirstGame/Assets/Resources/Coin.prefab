@@ -154,6 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _loadingScene: 2
+  _event:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5605732684802855102
 GameObject:
   m_ObjectHideFlags: 0

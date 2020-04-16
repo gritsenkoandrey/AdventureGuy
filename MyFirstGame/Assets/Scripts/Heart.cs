@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+//using UnityEngine.Events;
 
 
 public class Heart : MonoBehaviour
@@ -9,6 +10,7 @@ public class Heart : MonoBehaviour
 
     private Character _character;
 
+    //public UnityEvent _event;
     #endregion
 
 
@@ -19,8 +21,9 @@ public class Heart : MonoBehaviour
         _character = heart.GetComponent<Character>();
         if (_character)
         {
-            _character.Health = _character.Health + _healthPlus;
             _character.AudioGetHearth();
+            //_character.Hearth++;
+            _character.Health += _healthPlus;
             Destroy(gameObject);
         }
     }

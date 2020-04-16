@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f21a8209f37c08d4b980f32ba0f2c4d4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _audioClipBulletCharacter: {fileID: 8300000, guid: 48e387272fb1e724d92e57c1c9330251,
+      type: 3}
+  - _audioClipJumpCharacter: {fileID: 8300000, guid: 62505b88485933f42b675f472a9f699f,
+      type: 3}
+  - _audioClipHeart: {fileID: 8300000, guid: 25b73ff12b0b1e145983b9e44791c313, type: 3}
+  - _audioClipJumpForce: {fileID: 8300000, guid: bb0e9ab5482558745988fb0bbdbca668,
+      type: 3}
+  - _audioClipCoin: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

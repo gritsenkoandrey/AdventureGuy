@@ -5,7 +5,7 @@ public class ShootableMonster : Monster
 {
     #region Fields
 
-    [SerializeField] private float _rate = 2.0F;
+    [SerializeField] private float _rate = 2.0f;
 
     private Bullet _bullet;
     private Color _bulletColor = Color.red;
@@ -35,7 +35,7 @@ public class ShootableMonster : Monster
         var unit = collider.GetComponent<Unit>();
         if (unit && unit as Character)
         {
-            if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.5F)
+            if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.5f)
                 ReceiveDamage();
             else unit.ReceiveDamage();
         }
@@ -49,7 +49,7 @@ public class ShootableMonster : Monster
     private void Shoot()
     {
         Vector3 position = transform.position;
-        position.y += 0.2F;
+        position.y += 0.2f;
         var newBullet = Instantiate(_bullet, position, _bullet.transform.rotation);
         
         newBullet.Parent = gameObject;

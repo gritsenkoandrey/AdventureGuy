@@ -6,7 +6,7 @@ public class MoveableMonster : Monster
 {
     #region Fields
 
-    [SerializeField] private float _speed = 2.0F;
+    [SerializeField] private float _speed = 2.0f;
 
     private Vector3 _direction;
 
@@ -32,7 +32,7 @@ public class MoveableMonster : Monster
         var unit = collider.GetComponent<Unit>();
         if (unit && unit as Character)
         {
-            if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.5F)
+            if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.5f)
                 ReceiveDamage();
             else unit.ReceiveDamage();
         }
@@ -46,9 +46,9 @@ public class MoveableMonster : Monster
     private void Move()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(
-            transform.position + transform.up * 0.1F + transform.right * _direction.x * 0.55F, 0.1F);
+            transform.position + transform.up * 0.1f + transform.right * _direction.x * 0.55f, 0.1f);
         // если в массиве нет элемента, который принадлежит персонажу, то меняем направление движения
-        if (colliders.Length > 0 && colliders.All(x => !x.GetComponent<Character>())) _direction *= -1.0F;
+        if (colliders.Length > 0 && colliders.All(x => !x.GetComponent<Character>())) _direction *= -1.0f;
 
         transform.position = Vector3.MoveTowards(transform.position, 
                 transform.position + _direction, _speed * Time.deltaTime);

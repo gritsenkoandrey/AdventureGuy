@@ -42,8 +42,8 @@ GameObject:
   - component: {fileID: 4018073072270463463}
   - component: {fileID: 6269681334770599157}
   - component: {fileID: 183270080705123317}
-  - component: {fileID: 2209865043711322624}
   - component: {fileID: 7861053868705067064}
+  - component: {fileID: 2209865043711322624}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -131,18 +131,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.07058263}
   serializedVersion: 2
   m_Radius: 1.1
---- !u!114 &2209865043711322624
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8818298968650211584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da39e60ff32e3b040b74e328808852fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &7861053868705067064
 Animator:
   serializedVersion: 3
@@ -162,3 +150,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2209865043711322624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818298968650211584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da39e60ff32e3b040b74e328808852fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

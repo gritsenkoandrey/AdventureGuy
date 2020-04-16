@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 3843283199097151090}
   - component: {fileID: 3843283199097151091}
   - component: {fileID: 3843283199097151085}
-  - component: {fileID: 2279918174726768111}
   - component: {fileID: 3843283199097151084}
+  - component: {fileID: 5195559959957334947}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Player
@@ -183,7 +183,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!82 &2279918174726768111
+--- !u!114 &3843283199097151084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3843283199097151087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373a97efffa7be14daa45d0f5f4f1a14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 4
+  _jumpForce: 6.5
+  _audioClipBulletCharacter: {fileID: 8300000, guid: 48e387272fb1e724d92e57c1c9330251,
+    type: 3}
+  _audioClipJumpCharacter: {fileID: 8300000, guid: 62505b88485933f42b675f472a9f699f,
+    type: 3}
+  _audioClipHeart: {fileID: 8300000, guid: 25b73ff12b0b1e145983b9e44791c313, type: 3}
+  _audioClipJumpForce: {fileID: 8300000, guid: bb0e9ab5482558745988fb0bbdbca668, type: 3}
+  _audioClipCoin: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
+--- !u!82 &5195559959957334947
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -280,25 +301,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3843283199097151084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3843283199097151087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373a97efffa7be14daa45d0f5f4f1a14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 4
-  _jumpForce: 6.5
-  _bullet: {fileID: 1221137602271764587, guid: e230164472de3a643a9638e154d694f4, type: 3}
-  _audioClipBulletShot: {fileID: 8300000, guid: 48e387272fb1e724d92e57c1c9330251,
-    type: 3}
-  _audioClipJumpCharacter: {fileID: 8300000, guid: 62505b88485933f42b675f472a9f699f,
-    type: 3}
-  _audioClipHeart: {fileID: 8300000, guid: 25b73ff12b0b1e145983b9e44791c313, type: 3}
-  _audioClipJumpForce: {fileID: 8300000, guid: bb0e9ab5482558745988fb0bbdbca668, type: 3}
-  _audioClipCoin: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
