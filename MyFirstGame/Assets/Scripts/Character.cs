@@ -9,13 +9,17 @@ public class Character : Unit
     [SerializeField] private float _speed = 4.0f;
     [SerializeField] private float _jumpForce = 6.5f;
 
+    private float _extraJump;
+    [SerializeField] private float _extraJumpValue;
+
     private float _plusJumpForce = 2.0f;
     private float _timeJumpForce = 3.0f;
 
     private int _currentHealth = 5;
     private int _maxHealth = 5;
 
-    private bool _isGround = false;
+    //private bool _isGround = false;
+    private bool _isGround;
 
     private LivesBar _livesBar;
     private Rigidbody2D _rigidbody;
@@ -34,6 +38,12 @@ public class Character : Unit
     [SerializeField] private AudioClip _audioClipCoin;
 
     private Vector3 _direction;
+    private Vector3 _position;
+
+    //checkground
+    [SerializeField] private float _checkRadius;
+    [SerializeField] private Transform _groundCheck;
+    [SerializeField] private LayerMask _whatIsGround;
 
     #endregion
 
@@ -153,7 +163,6 @@ public class Character : Unit
 
             transform.position = Vector3.MoveTowards(position, transform.position + direction, speed);
             _sprite.flipX = direction.x < 0;
-
             if (_isGround)
                 State = CharacterState.Run;
         }
@@ -161,12 +170,31 @@ public class Character : Unit
 
     private void Jump()
     {
-        if (_isGround && Input.GetButtonDown("Jump"))
-        {
-            _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
+        //if (_isGround && Input.GetButtonDown("Jump"))
+        //{
+        //    _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
 
+        //    _audio.PlayOneShot(_audioClipJumpCharacter);
+        //    //_audioSound.AudioJumpCharacter();
+        //}
+
+        if (_isGround == true)
+        {
+            _extraJump = _extraJumpValue;
+        }
+
+        // при каждом прыжке двойные прыжки уменьшаются
+        if (Input.GetButtonDown("Jump") && _extraJump > 0)
+        {
+            _rigidbody.velocity = Vector2.up * _jumpForce;
             _audio.PlayOneShot(_audioClipJumpCharacter);
-            //_audioSound.AudioJumpCharacter();
+            _extraJump--;
+        }
+        // чтобы первый прыжок не считался как дополнительный прыжок
+        else if (Input.GetButtonDown("Jump") && _extraJump == 0 && _isGround == true)
+        {
+            _rigidbody.velocity = Vector2.up * _jumpForce;
+            _audio.PlayOneShot(_audioClipJumpCharacter);
         }
     }
 
@@ -175,18 +203,18 @@ public class Character : Unit
         if (Input.GetButtonDown("Fire1"))
         {
             _direction = transform.right * (_sprite.flipX ? -1 : 1);
-            var position = transform.position;
+            _position = transform.position;
 
             if (_direction.x > 0)
             {
-                position.x += 1;
+                _position.x += 1;
             }
             else
             {
-                position.x -= 1;
+                _position.x -= 1;
             }
 
-            var newBullet = Instantiate(_bullet, position, _bullet.transform.rotation);
+            var newBullet = Instantiate(_bullet, _position, _bullet.transform.rotation);
 
             // при стрельбе мы являемся родителем пули и она нас не бьет
             //newBullet.Parent = gameObject;
@@ -222,13 +250,21 @@ public class Character : Unit
         _sprite.color = Color.white;
     }
 
+    //private void CheckGround()
+    //{
+    //    var colliders = Physics2D.OverlapCircleAll(transform.position, 0.75f); //0.8F
+    //    _isGround = colliders.Length > 1;
+
+    //    // если мы не на земле, то проигрывается анимация Jump
+    //    if (!_isGround) State = CharacterState.Jump;
+    //}
+
     private void CheckGround()
     {
-        var colliders = Physics2D.OverlapCircleAll(transform.position, 0.75f); //0.8F
-        _isGround = colliders.Length > 1;
+        _isGround = Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _whatIsGround);
 
-        // если мы не на земле, то проигрывается анимация Jump
-        if (!_isGround) State = CharacterState.Jump;
+        if (_isGround == false)
+            State = CharacterState.Jump;
     }
 
     private void NormalJumpForce()

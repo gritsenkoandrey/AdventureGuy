@@ -48,7 +48,8 @@ public class MoveableMonster : Monster
         Collider2D[] colliders = Physics2D.OverlapCircleAll(
             transform.position + transform.up * 0.1f + transform.right * _direction.x * 0.55f, 0.1f);
         // если в массиве нет элемента, который принадлежит персонажу, то меняем направление движения
-        if (colliders.Length > 0 && colliders.All(x => !x.GetComponent<Character>())) _direction *= -1.0f;
+        if (colliders.Length > 0 && colliders.All(x => !x.GetComponent<Character>()))
+            _direction *= -1.0f;
 
         transform.position = Vector3.MoveTowards(transform.position, 
                 transform.position + _direction, _speed * Time.deltaTime);

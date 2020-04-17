@@ -8,9 +8,11 @@ public class ShootableMonster : Monster
     [SerializeField] private float _rate = 2.0f;
 
     private Bullet _bullet;
-    private Color _bulletColor = Color.red;
-    private Vector3 _direction;
     private SpriteRenderer _sprite;
+
+    private Color _bulletColor = Color.green;
+    private Vector3 _direction;
+    private Vector3 _position;
 
     #endregion
 
@@ -37,7 +39,8 @@ public class ShootableMonster : Monster
         {
             if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.5f)
                 ReceiveDamage();
-            else unit.ReceiveDamage();
+            else 
+                unit.ReceiveDamage();
         }
     }
 
@@ -48,12 +51,21 @@ public class ShootableMonster : Monster
 
     private void Shoot()
     {
-        Vector3 position = transform.position;
-        position.y += 0.2f;
-        var newBullet = Instantiate(_bullet, position, _bullet.transform.rotation);
-        
-        newBullet.Parent = gameObject;
-        newBullet.Direction = -newBullet.transform.right;
+        _direction = -transform.right * (_sprite.flipX ? -1 : 1);
+        _position = transform.position;
+        // из-за инверсии спрайта _direction идет наоборот
+        if (_direction.x > 0)
+        {
+            _position.x += 1;
+        }
+        else
+        {
+            _position.x -= 1;
+        }
+
+        var newBullet = Instantiate(_bullet, _position, _bullet.transform.rotation);
+        newBullet.Direction = -newBullet.transform.right * (_sprite.flipX ? -1 : 1);
+        //newBullet.Parent = gameObject;
         newBullet.Color = _bulletColor;
     }
 

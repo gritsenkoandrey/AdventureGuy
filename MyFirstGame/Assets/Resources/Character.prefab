@@ -43,8 +43,8 @@ GameObject:
   - component: {fileID: 291201425933905601}
   - component: {fileID: 291201425933905600}
   - component: {fileID: 291201425933905603}
-  - component: {fileID: 291201425933905602}
   - component: {fileID: 291201425933905598}
+  - component: {fileID: 7217813904447154902}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Player
@@ -163,20 +163,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &291201425933905602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291201425933905604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373a97efffa7be14daa45d0f5f4f1a14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 3
-  _jumpForce: 10
 --- !u!95 &291201425933905598
 Animator:
   serializedVersion: 3
@@ -196,3 +182,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7217813904447154902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291201425933905604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cbe70470871fe24fb87506c6d6e6adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 4
+  _jump: 4
+  _checkRadius: 0.25
+  _groundCheck: {fileID: 0}
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  _extraJumpValue: 0
+  _animator: {fileID: 0}
