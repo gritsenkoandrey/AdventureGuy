@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 
 
 public class FlyingMonster : Monster
@@ -54,19 +55,19 @@ public class FlyingMonster : Monster
     private void MoveMonster()
     {
         var speed = _speed * Time.deltaTime;
-        _direction = transform.right * (_sprite.flipX ? -1 : 1);
+        _direction = transform.right;
         _position = transform.position;
 
         if (transform.position.x > _point.position.x + _range)
         {
             _isMovingRight = false;
-            _sprite.flipX = _position.x < 0;
+            _sprite.flipX = _direction.x > 0;
         }
 
         else if (transform.position.x < _point.position.x - _range)
         {
             _isMovingRight = true;
-            _sprite.flipX = _position.x > 0;
+            _sprite.flipX = _direction.x < 0;
         }
 
         if (_isMovingRight)
