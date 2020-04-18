@@ -148,6 +148,36 @@ public class Character : Unit
         }
     }
 
+    // при попадании на  MovingPlatform, платформа является родителем персонажа
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        var platformX = collision.collider.GetComponent<MovingPlatformX>();
+        var platformY = collision.collider.GetComponent<MovingPlatformY>();
+        var platformAngle = collision.collider.GetComponent<MovingPlatformAngle>();
+
+        if (platformX || platformY || platformAngle)
+        {
+            transform.parent = collision.transform;
+        }
+        //if (collision.gameObject.tag.Equals("Platform"))
+        //{
+        //    transform.parent = collision.transform;
+        //}
+    }
+
+    // при спрыгивании с платформы все условия обнуляются
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        var platformX = collision.collider.GetComponent<MovingPlatformX>();
+        var platformY = collision.collider.GetComponent<MovingPlatformY>();
+        var platformAngle = collision.collider.GetComponent<MovingPlatformAngle>();
+
+        if (platformX || platformY || platformAngle)
+        {
+            transform.parent = null;
+        }
+    }
+
     #endregion
 
 

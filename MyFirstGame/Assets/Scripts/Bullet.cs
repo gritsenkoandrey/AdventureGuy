@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
     #region Fields
 
     [SerializeField] private float _speed = 10.0f;
-    [SerializeField] private float _lifeTime = 1.0f;
+    [SerializeField] private float _lifeTime = 0.8f;
 
     private Vector3 _direction;
 

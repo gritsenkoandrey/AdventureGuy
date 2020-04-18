@@ -10,7 +10,6 @@ public class MovingPlatformY : MonoBehaviour
 
     private bool _isMovingUp;
 
-
     private void Update()
     {
         MovingPlatform();

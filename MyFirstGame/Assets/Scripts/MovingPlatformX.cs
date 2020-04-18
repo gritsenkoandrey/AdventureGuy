@@ -10,7 +10,6 @@ public class MovingPlatformX : MonoBehaviour
 
     private bool _isMovingRight;
 
-
     private void Update()
     {
         MovingPlatform();

@@ -47,7 +47,7 @@ public class DialogManager : MonoBehaviour
         DisplayNextSentence();
     }
 
-    private void DisplayNextSentence() // вывод следующей буквы
+    public void DisplayNextSentence() // вывод следующей буквы
     {
         if(_sentences.Count == 0)
         {
