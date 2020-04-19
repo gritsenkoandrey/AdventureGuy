@@ -18,9 +18,6 @@ public class Character : Unit
     private int _currentHealth = 5;
     private int _maxHealth = 5;
 
-    //private bool _isGround = false;
-    private bool _isGround;
-
     private LivesBar _livesBar;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
@@ -29,8 +26,8 @@ public class Character : Unit
 
     //private AudioSound _audioSound;
 
+    // audio
     private AudioSource _audio;
-
     [SerializeField] private AudioClip _audioClipBulletCharacter;
     [SerializeField] private AudioClip _audioClipJumpCharacter;
     [SerializeField] private AudioClip _audioClipHeart;
@@ -41,9 +38,15 @@ public class Character : Unit
     private Vector3 _position;
 
     //checkground
+    private bool _isGround;
     [SerializeField] private float _checkRadius;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private LayerMask _whatIsGround;
+
+    //platform
+    private int _playerObject;
+    private int _colliderObject;
+    [SerializeField] private LayerMask _whatIsPlatform;
 
     #endregion
 
@@ -123,8 +126,16 @@ public class Character : Unit
         _livesBar = FindObjectOfType<LivesBar>();
     }
 
+    private void Start()
+    {
+        // определяем слои
+        _playerObject = LayerMask.NameToLayer("Player");
+        _colliderObject = LayerMask.NameToLayer("Platform");
+    }
+
     private void FixedUpdate()
     {
+        IgnoreLayerPlatform();
         CheckGround();
     }
 
@@ -220,6 +231,7 @@ public class Character : Unit
             _audio.PlayOneShot(_audioClipJumpCharacter);
             _extraJump--;
         }
+
         // чтобы первый прыжок не считался как дополнительный прыжок
         else if (Input.GetButtonDown("Jump") && _extraJump == 0 && _isGround == true)
         {
@@ -281,22 +293,37 @@ public class Character : Unit
 
     //private void CheckGround()
     //{
-    //    var colliders = Physics2D.OverlapCircleAll(transform.position, 0.75f); //0.8F
+    //    var colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
     //    _isGround = colliders.Length > 1;
 
-    //    // если мы не на земле, то проигрывается анимация Jump
-    //    if (!_isGround) State = CharacterState.Jump;
+    //    if (_isGround == false)
+    //        State = CharacterState.Jump;
     //}
 
     private void CheckGround()
     {
-        _isGround = Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _whatIsGround);
+        _isGround = (Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _whatIsGround))
+            || (Physics2D.OverlapCircle(_groundCheck.position, _checkRadius, _whatIsPlatform));
 
         if (_isGround == false)
             State = CharacterState.Jump;
     }
 
-    internal void Bounce()
+    // игнорируем слои для того чтобы снизу запрыгивать на платформу
+    private void IgnoreLayerPlatform()
+    {
+        if(_rigidbody.velocity.y > 0)
+        {
+            Physics2D.IgnoreLayerCollision(_playerObject, _colliderObject, true);
+        }
+        else
+        {
+            Physics2D.IgnoreLayerCollision(_playerObject, _colliderObject, false);
+        }
+    }
+
+    // персонажа подбрасывает вверх
+    private void Bounce()
     {
         // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
         _rigidbody.velocity = Vector3.zero;

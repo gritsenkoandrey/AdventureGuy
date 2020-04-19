@@ -3,38 +3,45 @@
 
 public class PlatformActivator : MonoBehaviour
 {
+    // платформа с которой взаимодействуем
     [SerializeField] private MovingPlatformY _platform;
 
-    //private float _normalButtonPosition = 0.65f;
-    private float _pressedButton = 0.4f;
-    private float _averageButtonPosition = 0.6f;
+    // нормальное расположение кнопки по координате Y
+    [SerializeField] private float _normalButtonPosition;
 
+    // сила с которой жмем на кнопку
+    private float _pressedButton = 0.4f;
+    private float _averageButtonPosition;
+
+    // задаваемая скорость платформы
+    [SerializeField] private float _speedActivationPlatform = 3.0f;
     private bool _isActive = false;
+
+    private void Awake()
+    {
+        _averageButtonPosition = _normalButtonPosition - _pressedButton;
+    }
 
     private void Update()
     {
-        //if (_isClose == true && _platform.transform.position.y > -1.0f)
-        //{
-        //    _platform.transform.Translate(Vector2.down * Time.deltaTime);
-        //}
         if(_isActive == true)
         {
-            _platform.Speed = 3.0f;
+            _platform.Speed = _speedActivationPlatform;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && transform.position.y > _averageButtonPosition)
+        if (collision.CompareTag("Player") && transform.position.y > _averageButtonPosition)
         {
             transform.Translate(Vector2.down * _pressedButton);
             _isActive = true;
         }
     }
 
-    //private void OnTriggerExit2D(Collider2D collision)
-    //{
-    //    // поднятие кнопки
-    //    transform.position = new Vector2(transform.position.x, _normalButtonPosition);
-    //}
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // поднятие кнопки
+        transform.position = new Vector2(transform.position.x, _normalButtonPosition);
+    }
 }
