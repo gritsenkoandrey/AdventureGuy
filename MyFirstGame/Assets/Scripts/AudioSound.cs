@@ -7,13 +7,14 @@ public class AudioSound : MonoBehaviour
 
     #region Fields
 
-    public static AudioSound _audioSound;
     private AudioSource _audio;
     [SerializeField] private AudioClip _audioClipBulletCharacter;
     [SerializeField] private AudioClip _audioClipJumpCharacter;
     [SerializeField] private AudioClip _audioClipHeart;
     [SerializeField] private AudioClip _audioClipJumpForce;
     [SerializeField] private AudioClip _audioClipCoin;
+
+    public static AudioSound _audioSound;
 
     #endregion
 
