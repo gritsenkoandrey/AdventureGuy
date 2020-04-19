@@ -15,5 +15,11 @@ public class MenuGameOver : MonoBehaviour
         Application.Quit();
     }
 
+    // перезагрузить текущую сцену
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+    }
+
     #endregion
 }

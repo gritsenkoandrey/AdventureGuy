@@ -66,6 +66,24 @@ public class GamePauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void GiveUp()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(3);
+    }
+
+    public void LoadLevelOne()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(4);
+    }
+
+    public void LoadLevelTwo()
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(5);
+    }
+
     #endregion
 
     // чтобы кнопки продолжали анимацию, нужно в Animator выбрать Unscale Time.

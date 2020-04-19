@@ -8,6 +8,12 @@ public class MovingPlatformY : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _range;
 
+    internal float Speed
+    {
+        get { return _speed; }
+        set { _speed = value; }
+    }
+
     private bool _isMovingUp;
 
     private void Update()

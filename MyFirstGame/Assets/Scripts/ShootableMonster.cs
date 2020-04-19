@@ -9,6 +9,7 @@ public class ShootableMonster : Monster
 
     private Bullet _bullet;
     private SpriteRenderer _sprite;
+    private Character _character;
 
     private Color _bulletColor = Color.green;
     private Vector3 _direction;
@@ -23,6 +24,7 @@ public class ShootableMonster : Monster
     {
         _sprite = GetComponent<SpriteRenderer>();
         _bullet = Resources.Load<Bullet>("Bullet");
+        _character = GetComponent<Character>();
     }
 
     protected override void Start()
@@ -38,9 +40,13 @@ public class ShootableMonster : Monster
         if (unit && unit as Character)
         {
             if (Mathf.Abs(unit.transform.position.x - transform.position.x) < 0.5f)
+            {
                 ReceiveDamage();
-            else 
+            }
+            else
+            {
                 unit.ReceiveDamage();
+            }
         }
     }
 

@@ -149,7 +149,7 @@ public class Character : Unit
     }
 
     // при попадании на  MovingPlatform, платформа является родителем персонажа
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         var platformX = collision.collider.GetComponent<MovingPlatformX>();
         var platformY = collision.collider.GetComponent<MovingPlatformY>();
@@ -166,7 +166,7 @@ public class Character : Unit
     }
 
     // при спрыгивании с платформы все условия обнуляются
-    public void OnCollisionExit2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         var platformX = collision.collider.GetComponent<MovingPlatformX>();
         var platformY = collision.collider.GetComponent<MovingPlatformY>();
@@ -262,8 +262,7 @@ public class Character : Unit
         //State = CharacterState.Hit;
 
         Health--;
-        _rigidbody.velocity = Vector3.zero; // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
-        _rigidbody.AddForce(transform.up * 4, ForceMode2D.Impulse); // при получении урона отбрасывает вверх
+        Bounce();
 
         // перекрашивает персонажа обратно в начальный цвет, через 0,5 сек
         _sprite.color = Color.red;
@@ -271,7 +270,7 @@ public class Character : Unit
         if (_currentHealth <= 0)
         {
             Die();
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
         }
     }
 
@@ -295,6 +294,14 @@ public class Character : Unit
 
         if (_isGround == false)
             State = CharacterState.Jump;
+    }
+
+    internal void Bounce()
+    {
+        // обнуляет силу притяжения при подении, чтобы на ловушке подбросило
+        _rigidbody.velocity = Vector3.zero;
+        // при получении урона отбрасывает вверх
+        _rigidbody.AddForce(transform.up * 4, ForceMode2D.Impulse);
     }
 
     private void NormalJumpForce()
