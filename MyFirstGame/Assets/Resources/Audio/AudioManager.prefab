@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1357599086285375085}
   - component: {fileID: 1357599086285375075}
   m_Layer: 0
-  m_Name: AudioSound
+  m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21a8209f37c08d4b980f32ba0f2c4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _audioSound: {fileID: 0}
   _audioClipBulletCharacter: {fileID: 8300000, guid: 48e387272fb1e724d92e57c1c9330251,
     type: 3}
   _audioClipJumpCharacter: {fileID: 8300000, guid: 62505b88485933f42b675f472a9f699f,

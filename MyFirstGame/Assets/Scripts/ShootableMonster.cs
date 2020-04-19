@@ -59,6 +59,7 @@ public class ShootableMonster : Monster
     {
         _direction = -transform.right * (_sprite.flipX ? -1 : 1);
         _position = transform.position;
+
         // из-за инверсии спрайта _direction идет наоборот
         if (_direction.x > 0)
         {

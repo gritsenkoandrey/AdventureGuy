@@ -7,8 +7,8 @@ public class AudioSound : MonoBehaviour
 
     #region Fields
 
+    public static AudioSound _audioSound;
     private AudioSource _audio;
-
     [SerializeField] private AudioClip _audioClipBulletCharacter;
     [SerializeField] private AudioClip _audioClipJumpCharacter;
     [SerializeField] private AudioClip _audioClipHeart;
@@ -22,6 +22,7 @@ public class AudioSound : MonoBehaviour
 
     private void Awake()
     {
+        _audioSound = this;
         _audio = GetComponent<AudioSource>();
     }
 

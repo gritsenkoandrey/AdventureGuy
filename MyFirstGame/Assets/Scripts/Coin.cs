@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 
@@ -11,7 +10,6 @@ public class Coin : MonoBehaviour
     private float _timeLoadindScene = 0.3f;
 
     private Character _character;
-    //public UnityEvent _event;
 
     #endregion
 
@@ -23,8 +21,7 @@ public class Coin : MonoBehaviour
         _character = coin.GetComponent<Character>();
         if(_character)
         {
-            _character.AudioGetCoin();
-            //_character.Coin++;
+            AudioSound._audioSound.AudioGetCoin();
             Invoke(nameof(Scene), _timeLoadindScene);
             //Destroy(gameObject);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;

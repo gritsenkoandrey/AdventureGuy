@@ -24,16 +24,6 @@ public class Character : Unit
     private SpriteRenderer _sprite;
     private Bullet _bullet;
 
-    //private AudioSound _audioSound;
-
-    // audio
-    private AudioSource _audio;
-    [SerializeField] private AudioClip _audioClipBulletCharacter;
-    [SerializeField] private AudioClip _audioClipJumpCharacter;
-    [SerializeField] private AudioClip _audioClipHeart;
-    [SerializeField] private AudioClip _audioClipJumpForce;
-    [SerializeField] private AudioClip _audioClipCoin;
-
     private Vector3 _direction;
     private Vector3 _position;
 
@@ -69,21 +59,10 @@ public class Character : Unit
         }
     }
 
-    //internal int Hearth
-    //{
-    //    get 
-    //    { 
-    //        _audioSound.AudioGetHearth();
-    //        return 0;
-    //    }
-    //    set => value = Hearth;
-    //}
-
     internal float JumpForce
     {
         get 
         {
-            //_audioSound.AudioGetPowerJump();
             return _jumpForce; 
         }
         set
@@ -93,16 +72,6 @@ public class Character : Unit
             Invoke(nameof(NormalJumpForce), _timeJumpForce);
         }
     }
-
-    //internal int Coin
-    //{
-    //    get 
-    //    {
-    //        //_audioSound.AudioGetCoin();
-    //        return 0;
-    //    }
-    //    set => value = Coin;
-    //}
 
     private CharacterState State
     {
@@ -120,8 +89,6 @@ public class Character : Unit
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
-        _audio = GetComponent<AudioSource>();
-        //_audioSound = GetComponent<AudioSound>();
         _bullet = Resources.Load<Bullet>("Bullet");
         _livesBar = FindObjectOfType<LivesBar>();
     }
@@ -214,9 +181,6 @@ public class Character : Unit
         //if (_isGround && Input.GetButtonDown("Jump"))
         //{
         //    _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
-
-        //    _audio.PlayOneShot(_audioClipJumpCharacter);
-        //    //_audioSound.AudioJumpCharacter();
         //}
 
         if (_isGround == true)
@@ -228,7 +192,7 @@ public class Character : Unit
         if (Input.GetButtonDown("Jump") && _extraJump > 0)
         {
             _rigidbody.velocity = Vector2.up * _jumpForce;
-            _audio.PlayOneShot(_audioClipJumpCharacter);
+            AudioSound._audioSound.AudioJumpCharacter();
             _extraJump--;
         }
 
@@ -236,7 +200,7 @@ public class Character : Unit
         else if (Input.GetButtonDown("Jump") && _extraJump == 0 && _isGround == true)
         {
             _rigidbody.velocity = Vector2.up * _jumpForce;
-            _audio.PlayOneShot(_audioClipJumpCharacter);
+            AudioSound._audioSound.AudioJumpCharacter();
         }
     }
 
@@ -264,8 +228,7 @@ public class Character : Unit
             //задаем направление движения созданной пули
             newBullet.Direction = newBullet.transform.right * (_sprite.flipX ? -1 : 1);
 
-            _audio.PlayOneShot(_audioClipBulletCharacter);
-            //_audioSound.AudioBulletCharacter();
+            AudioSound._audioSound.AudioBulletCharacter();
         }
     }
 
@@ -334,21 +297,6 @@ public class Character : Unit
     private void NormalJumpForce()
     {
         _jumpForce -= _plusJumpForce;
-    }
-
-    internal void AudioGetHearth()
-    {
-        _audio.PlayOneShot(_audioClipHeart);
-    }
-
-    internal void AudioGetPowerJump()
-    {
-        _audio.PlayOneShot(_audioClipJumpForce);
-    }
-
-    internal void AudioGetCoin()
-    {
-        _audio.PlayOneShot(_audioClipCoin);
     }
 
     #endregion

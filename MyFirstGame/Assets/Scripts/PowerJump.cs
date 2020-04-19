@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 public class PowerJump : MonoBehaviour
 {
     #region Fields
@@ -18,7 +19,7 @@ public class PowerJump : MonoBehaviour
         _character = jumpForce.GetComponent<Character>();
         if(_character)
         {
-            _character.AudioGetPowerJump();
+            AudioSound._audioSound.AudioGetPowerJump();
             _character.JumpForce += _plusJumpForce;
             Destroy(gameObject);
         }
