@@ -3197,6 +3197,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1978462251}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &394529149 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1357599086285375075, guid: 8ea22c72fca57e54daa311fcfd9bf5ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 1267080429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &398696673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6130012343501858257, guid: a02af4f1a8ddba04e9627b5f0435844e,
@@ -18240,6 +18246,21 @@ PrefabInstance:
       propertyPath: _audio
       value: 
       objectReference: {fileID: 519420033}
+    - target: {fileID: 6839889073690361490, guid: 0923382b5524fb945ab89eff9bb5f23b,
+        type: 3}
+      propertyPath: _audioMainCamera
+      value: 
+      objectReference: {fileID: 519420033}
+    - target: {fileID: 6839889073690361490, guid: 0923382b5524fb945ab89eff9bb5f23b,
+        type: 3}
+      propertyPath: _audioSound
+      value: 
+      objectReference: {fileID: 394529149}
+    - target: {fileID: 6839889073690361490, guid: 0923382b5524fb945ab89eff9bb5f23b,
+        type: 3}
+      propertyPath: _audioManager
+      value: 
+      objectReference: {fileID: 394529149}
     - target: {fileID: 6839889073690361493, guid: 0923382b5524fb945ab89eff9bb5f23b,
         type: 3}
       propertyPath: m_Name

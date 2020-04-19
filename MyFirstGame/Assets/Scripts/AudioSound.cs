@@ -13,6 +13,7 @@ public class AudioSound : MonoBehaviour
     [SerializeField] private AudioClip _audioClipHeart;
     [SerializeField] private AudioClip _audioClipJumpForce;
     [SerializeField] private AudioClip _audioClipCoin;
+    [SerializeField] private AudioClip _audioClipPlatform;
 
     public static AudioSound _audioSound;
 
@@ -61,6 +62,11 @@ public class AudioSound : MonoBehaviour
     internal void AudioGetCoin()
     {
         _audio.PlayOneShot(_audioClipCoin);
+    }
+
+    internal void AudioPlatform()
+    {
+        _audio.PlayOneShot(_audioClipPlatform);
     }
 
     #endregion

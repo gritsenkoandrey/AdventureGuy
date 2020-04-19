@@ -53,8 +53,7 @@ public class Character : Unit
         }
         set
         {
-            if(value <= _maxHealth)
-                _currentHealth = value;
+            if(value <= _maxHealth) _currentHealth = value;
             _livesBar.Refresh();
         }
     }
@@ -67,8 +66,7 @@ public class Character : Unit
         }
         set
         {
-            if (_jumpForce < value)
-                _jumpForce = value;
+            if (_jumpForce < value) _jumpForce = value;
             Invoke(nameof(NormalJumpForce), _timeJumpForce);
         }
     }
@@ -165,14 +163,19 @@ public class Character : Unit
     {
         if (Input.GetButton("Horizontal"))
         {
-            var direction = transform.right * Input.GetAxis("Horizontal");
-            var speed = _speed * Time.deltaTime;
-            var position = transform.position;
+            _direction = transform.right * Input.GetAxis("Horizontal");
 
-            transform.position = Vector3.MoveTowards(position, transform.position + direction, speed);
-            _sprite.flipX = direction.x < 0;
+            var speed = _speed * Time.deltaTime;
+            _position = transform.position;
+
+            transform.position = Vector3.MoveTowards(_position, transform.position + _direction, speed);
+
+            _sprite.flipX = _direction.x < 0;
+            
             if (_isGround)
+            {
                 State = CharacterState.Run;
+            }
         }
     }
 
@@ -258,7 +261,6 @@ public class Character : Unit
     //{
     //    var colliders = Physics2D.OverlapCircleAll(transform.position, 1f);
     //    _isGround = colliders.Length > 1;
-
     //    if (_isGround == false)
     //        State = CharacterState.Jump;
     //}

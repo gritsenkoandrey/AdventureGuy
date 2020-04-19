@@ -16,10 +16,10 @@ public class MenuGameOver : MonoBehaviour
     }
 
     // перезагрузить текущую сцену
-    public void RestartLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
-    }
+    //public void RestartLevel()
+    //{
+    //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+    //}
 
     #endregion
 }

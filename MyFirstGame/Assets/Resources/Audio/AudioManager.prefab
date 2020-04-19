@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21a8209f37c08d4b980f32ba0f2c4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSound: {fileID: 0}
   _audioClipBulletCharacter: {fileID: 8300000, guid: 48e387272fb1e724d92e57c1c9330251,
     type: 3}
   _audioClipJumpCharacter: {fileID: 8300000, guid: 62505b88485933f42b675f472a9f699f,
@@ -52,6 +51,7 @@ MonoBehaviour:
   _audioClipHeart: {fileID: 8300000, guid: 25b73ff12b0b1e145983b9e44791c313, type: 3}
   _audioClipJumpForce: {fileID: 8300000, guid: bb0e9ab5482558745988fb0bbdbca668, type: 3}
   _audioClipCoin: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
+  _audioClipPlatform: {fileID: 8300000, guid: 916be9d78ad5328418a9d4e194e30220, type: 3}
 --- !u!82 &1357599086285375075
 AudioSource:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

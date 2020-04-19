@@ -674,6 +674,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseMenuUI: {fileID: 6839889075615568147}
+  _audioMainCamera: {fileID: 0}
+  _audioManager: {fileID: 0}
 --- !u!1 &6839889073890549873
 GameObject:
   m_ObjectHideFlags: 0

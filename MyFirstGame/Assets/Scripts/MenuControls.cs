@@ -9,6 +9,7 @@ public class MenuControls : MonoBehaviour
     public void PlayPressed()
     {
         SceneManager.LoadScene(4);
+        //AudioSound._audioSound.AudioPressButtonStart();
     }
 
     public void ExitPressed()

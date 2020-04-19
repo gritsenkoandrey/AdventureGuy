@@ -13,6 +13,8 @@ public class PlatformActivator : MonoBehaviour
     private float _pressedButton = 0.4f;
     private float _averageButtonPosition;
 
+    private int _countSound = 1;
+
     // задаваемая скорость платформы
     [SerializeField] private float _speedActivationPlatform = 3.0f;
     private bool _isActive = false;
@@ -35,6 +37,14 @@ public class PlatformActivator : MonoBehaviour
         if (collision.CompareTag("Player") && transform.position.y > _averageButtonPosition)
         {
             transform.Translate(Vector2.down * _pressedButton);
+            
+            // чтобы звук активации происходил только 1 раз
+            if (_countSound == 1)
+            {
+                AudioSound._audioSound.AudioPlatform();
+                _countSound--;
+            }
+
             _isActive = true;
         }
     }
