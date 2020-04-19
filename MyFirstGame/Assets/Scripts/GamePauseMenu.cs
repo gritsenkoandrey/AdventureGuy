@@ -9,6 +9,7 @@ public class GamePauseMenu : MonoBehaviour
     private bool _isPaused = false;
 
     [SerializeField] private GameObject _pauseMenuUI;
+    [SerializeField] private AudioSource _audio;
 
     #endregion
 
@@ -44,6 +45,7 @@ public class GamePauseMenu : MonoBehaviour
     {
         _pauseMenuUI.SetActive(false); // во время продолжения игры меню не должно отображаться
         Time.timeScale = 1.0f;
+        _audio.volume = 0.1f;
         _isPaused = false;
     }
 
@@ -52,12 +54,14 @@ public class GamePauseMenu : MonoBehaviour
         // говорит о том, что это будут кнопки и мы должны с ними как то взаимодействовать
         _pauseMenuUI.SetActive(true); // во время паузы это меню должно появляться
         Time.timeScale = 0f;
+        _audio.volume = 0f;
         _isPaused = true;
     }
 
     public void LoadMainMenu()
     {
         Time.timeScale = 1.0f; // для того чтобы время начало двигаться дальше
+        _audio.volume = 0.1f;
         SceneManager.LoadScene(1);
     }
 
@@ -69,18 +73,21 @@ public class GamePauseMenu : MonoBehaviour
     public void GiveUp()
     {
         Time.timeScale = 1.0f;
+        _audio.volume = 0.1f;
         SceneManager.LoadScene(3);
     }
 
     public void LoadLevelOne()
     {
         Time.timeScale = 1.0f;
+        _audio.volume = 0.1f;
         SceneManager.LoadScene(4);
     }
 
     public void LoadLevelTwo()
     {
         Time.timeScale = 1.0f;
+        _audio.volume = 0.1f;
         SceneManager.LoadScene(5);
     }
 

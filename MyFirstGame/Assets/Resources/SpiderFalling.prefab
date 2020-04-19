@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7772308737698718296}
   - component: {fileID: 7772308737698718299}
   - component: {fileID: 7772308737698718298}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Spider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7772308738761754852}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SpiderFalling
   m_TagString: Untagged
   m_Icon: {fileID: 0}

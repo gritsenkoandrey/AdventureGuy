@@ -27,7 +27,7 @@ public class Coin : MonoBehaviour
             //_character.Coin++;
             Invoke(nameof(Scene), _timeLoadindScene);
             //Destroy(gameObject);
-            //gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
 

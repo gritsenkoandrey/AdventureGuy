@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3271687515842026320}
   - component: {fileID: 3271687515842026323}
   - component: {fileID: 3271687515842026322}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SpikeC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,6 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44989a651e19944b8ddee001a8dedd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lifeTimeObject: 1
+  _lifeTimeObjectAfterCollision: 0.2
 --- !u!1 &3271687516891476463
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3271687516891476460}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: SpikeFalling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
