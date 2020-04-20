@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 3843283199097151085}
   - component: {fileID: 3843283199097151084}
   m_Layer: 9
-  m_Name: Sprite
+  m_Name: RedHair
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -228,13 +228,6 @@ MonoBehaviour:
   _speed: 4
   _jumpForce: 6.5
   _extraJumpValue: 0
-  _audioClipBulletCharacter: {fileID: 8300000, guid: 48e387272fb1e724d92e57c1c9330251,
-    type: 3}
-  _audioClipJumpCharacter: {fileID: 8300000, guid: 62505b88485933f42b675f472a9f699f,
-    type: 3}
-  _audioClipHeart: {fileID: 8300000, guid: 25b73ff12b0b1e145983b9e44791c313, type: 3}
-  _audioClipJumpForce: {fileID: 8300000, guid: bb0e9ab5482558745988fb0bbdbca668, type: 3}
-  _audioClipCoin: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
   _checkRadius: 0.2
   _groundCheck: {fileID: 3806006038708425524}
   _whatIsGround:

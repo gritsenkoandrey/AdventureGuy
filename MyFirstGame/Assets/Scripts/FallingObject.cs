@@ -28,6 +28,7 @@ public class FallingObject : MonoBehaviour
         if (_character)
         {
             _rigidbody.isKinematic = false;
+            AudioSound._audioSound.AudioFallingItem();
             Destroy(gameObject, _lifeTimeObject);
         }
 

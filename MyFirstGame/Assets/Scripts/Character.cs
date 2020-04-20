@@ -38,6 +38,10 @@ public class Character : Unit
     private int _colliderObject;
     [SerializeField] private LayerMask _whatIsPlatform;
 
+    // respawn
+    //internal static Vector3 _playerPosition = new Vector3(0, 0, 0);
+    //private GameObject _character;
+
     #endregion
 
 
@@ -87,7 +91,6 @@ public class Character : Unit
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
-        _bullet = Resources.Load<Bullet>("Bullet");
         _livesBar = FindObjectOfType<LivesBar>();
     }
 
@@ -96,6 +99,8 @@ public class Character : Unit
         // определяем слои
         _playerObject = LayerMask.NameToLayer("Player");
         _colliderObject = LayerMask.NameToLayer("Platform");
+        _bullet = Resources.Load<Bullet>("Bullet");
+        //_character = FindGameObjectWithTag("Player");
     }
 
     private void FixedUpdate()
@@ -171,7 +176,7 @@ public class Character : Unit
             transform.position = Vector3.MoveTowards(_position, transform.position + _direction, speed);
 
             _sprite.flipX = _direction.x < 0;
-            
+
             if (_isGround)
             {
                 State = CharacterState.Run;
@@ -249,6 +254,14 @@ public class Character : Unit
         {
             Die();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+            //if (_playerPosition == new Vector3(0, 0, 0))
+            //{
+            //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+            //}
+            //else
+            //{
+            //    var newCharacter = Instantiate(_character, _playerPosition, Quaternion.identity);
+            //}
         }
     }
 

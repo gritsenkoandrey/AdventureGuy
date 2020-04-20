@@ -42,23 +42,6 @@ public class PlayerController : MonoBehaviour
         Jump();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag.Equals("MovingPlatform"))
-        {
-            this.transform.parent = collision.transform;
-        }
-    }
-
-    // при спрыгивании с платформы все условия обнуляются
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag.Equals("MovingPlatform"))
-        {
-            this.transform.parent = null;
-        }
-    }
-
     private void Run()
     {
         // _moveInput = направление движения объекта, если стрелка вправо то +1, влево -1

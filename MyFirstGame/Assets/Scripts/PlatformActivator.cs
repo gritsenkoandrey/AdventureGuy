@@ -38,7 +38,7 @@ public class PlatformActivator : MonoBehaviour
         {
             transform.Translate(Vector2.down * _pressedButton);
             
-            // чтобы звук активации происходил только 1 раз
+            // чтобы звук активации происходил только 1 раз, если кнопка не поднимается, то это условие можно убрать
             if (_countSound == 1)
             {
                 AudioSound._audioSound.AudioPlatform();
@@ -49,9 +49,9 @@ public class PlatformActivator : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        // поднятие кнопки
-        transform.position = new Vector2(transform.position.x, _normalButtonPosition);
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    // поднятие кнопки
+    //    transform.position = new Vector2(transform.position.x, _normalButtonPosition);
+    //}
 }
