@@ -52,6 +52,8 @@ MonoBehaviour:
   _audioClipJumpForce: {fileID: 8300000, guid: bb0e9ab5482558745988fb0bbdbca668, type: 3}
   _audioClipCoin: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
   _audioClipPlatform: {fileID: 8300000, guid: 916be9d78ad5328418a9d4e194e30220, type: 3}
+  _audioClipFallingItem: {fileID: 8300000, guid: 8b16d7798eecd2d4e9063f104bab1365,
+    type: 3}
 --- !u!82 &1357599086285375075
 AudioSource:
   m_ObjectHideFlags: 0
