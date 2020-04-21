@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 
 public class GamePauseMenu : MonoBehaviour
@@ -33,8 +34,9 @@ public class GamePauseMenu : MonoBehaviour
 
     #region Method
 
-    private void GamePause()
+    public void GamePause()
     {
+        // for PC
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (_isPaused)
@@ -46,6 +48,19 @@ public class GamePauseMenu : MonoBehaviour
                 Pause();
             }
         }
+
+        // for Android
+        //if(CrossPlatformInputManager.GetButtonDown("Cancel"))
+        //{
+        //    if (_isPaused)
+        //    {
+        //        Resume();
+        //    }
+        //    else
+        //    {
+        //        Pause();
+        //    }
+        //}
     }
 
     public void Resume()

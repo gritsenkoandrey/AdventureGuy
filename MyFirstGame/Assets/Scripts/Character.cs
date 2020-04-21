@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityStandardAssets.CrossPlatformInput;
 
 
 public class Character : Unit
@@ -40,7 +41,10 @@ public class Character : Unit
 
     // respawn
     //internal static Vector3 _playerPosition = new Vector3(0, 0, 0);
-    //private GameObject _character;
+
+    // run
+    private bool _isFacingRight = true;
+    private float _moveInput;
 
     #endregion
 
@@ -99,8 +103,8 @@ public class Character : Unit
         // определяем слои
         _playerObject = LayerMask.NameToLayer("Player");
         _colliderObject = LayerMask.NameToLayer("Platform");
+
         _bullet = Resources.Load<Bullet>("Bullet");
-        //_character = FindGameObjectWithTag("Player");
     }
 
     private void FixedUpdate()
@@ -111,13 +115,25 @@ public class Character : Unit
 
     private void Update()
     {
-        // когда стоим на твердой поверхности проигрывается анимация Idle
         if (_isGround)
             State = CharacterState.Idle;
 
-        Fire();
+        if (_isGround && _moveInput > 0 || _isGround && _moveInput < 0)
+            State = CharacterState.Run;
+        else if (_isGround && _moveInput == 0)
+            State = CharacterState.Idle;
+
+        if (CrossPlatformInputManager.GetButtonDown("Fire1"))
+        {
+            Fire();
+        }
+
+        if (CrossPlatformInputManager.GetButtonDown("Jump"))
+        {
+            Jump();
+        }
+
         Run();
-        Jump();
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -164,80 +180,144 @@ public class Character : Unit
 
     #region Methods
 
-    private void Run()
+    // for Android
+    public void Run()
     {
-        if (Input.GetButton("Horizontal"))
+        _moveInput = CrossPlatformInputManager.GetAxis("Horizontal");
+
+        _rigidbody.velocity = new Vector2(_moveInput * _speed, _rigidbody.velocity.y);
+
+        if (_isFacingRight == false && _moveInput > 0)
         {
-            _direction = transform.right * Input.GetAxis("Horizontal");
-
-            var speed = _speed * Time.deltaTime;
-            _position = transform.position;
-
-            transform.position = Vector3.MoveTowards(_position, transform.position + _direction, speed);
-
-            _sprite.flipX = _direction.x < 0;
-
-            if (_isGround)
-            {
-                State = CharacterState.Run;
-            }
+            Flip();
+        }
+        else if (_isFacingRight == true && _moveInput < 0)
+        {
+            Flip();
         }
     }
 
-    private void Jump()
-    {
-        //if (_isGround && Input.GetButtonDown("Jump"))
-        //{
-        //    _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
-        //}
+    //// for PC
+    //public void Run()
+    //{
+    //    if (Input.GetButton("Horizontal"))
+    //    {
+    //        _direction = transform.right * Input.GetAxis("Horizontal");
 
+    //        var speed = _speed * Time.deltaTime;
+    //        _position = transform.position;
+
+    //        transform.position = Vector3.MoveTowards(_position, transform.position + _direction, speed);
+
+    //        _sprite.flipX = _direction.x < 0;
+
+    //        if (_isGround)
+    //        {
+    //            State = CharacterState.Run;
+    //        }
+    //    }
+    //}
+
+    // for PC
+    //public void Jump()
+    //{
+    //    //if (_isGround && Input.GetButtonDown("Jump"))
+    //    //{
+    //    //    _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
+    //    //}
+
+    //    if (_isGround == true)
+    //    {
+    //        _extraJump = _extraJumpValue;
+    //    }
+
+    //    // при каждом прыжке двойные прыжки уменьшаются
+    //    if (Input.GetButtonDown("Jump") && _extraJump > 0)
+    //    {
+    //        _rigidbody.velocity = Vector2.up * _jumpForce;
+    //        AudioSound._audioSound.AudioJumpCharacter();
+    //        _extraJump--;
+    //    }
+
+    //    // чтобы первый прыжок не считался как дополнительный прыжок
+    //    else if (Input.GetButtonDown("Jump") && _extraJump == 0 && _isGround == true)
+    //    {
+    //        _rigidbody.velocity = Vector2.up * _jumpForce;
+    //        AudioSound._audioSound.AudioJumpCharacter();
+    //    }
+    //}
+
+    // for Android
+    public void Jump()
+    {
         if (_isGround == true)
         {
             _extraJump = _extraJumpValue;
         }
 
-        // при каждом прыжке двойные прыжки уменьшаются
-        if (Input.GetButtonDown("Jump") && _extraJump > 0)
+        if (_extraJump > 0)
         {
             _rigidbody.velocity = Vector2.up * _jumpForce;
-            AudioSound._audioSound.AudioJumpCharacter();
             _extraJump--;
+            AudioSound._audioSound.AudioJumpCharacter();
         }
-
-        // чтобы первый прыжок не считался как дополнительный прыжок
-        else if (Input.GetButtonDown("Jump") && _extraJump == 0 && _isGround == true)
+        else if (_extraJump == 0 && _isGround == true)
         {
             _rigidbody.velocity = Vector2.up * _jumpForce;
             AudioSound._audioSound.AudioJumpCharacter();
         }
     }
 
-    private void Fire()
+    // for PC
+    //public void Fire()
+    //{
+    //    if (Input.GetButtonDown("Fire1"))
+    //    {
+    //        _direction = transform.right * (_sprite.flipX ? -1 : 1);
+    //        _position = transform.position;
+
+    //        if (_direction.x > 0)
+    //        {
+    //            _position.x += 1;
+    //        }
+    //        else
+    //        {
+    //            _position.x -= 1;
+    //        }
+
+    //        var newBullet = Instantiate(_bullet, _position, _bullet.transform.rotation);
+
+    //        // при стрельбе мы являемся родителем пули и она нас не бьет
+    //        //newBullet.Parent = gameObject;
+
+    //        //задаем направление движения созданной пули
+    //        newBullet.Direction = newBullet.transform.right * (_sprite.flipX ? -1 : 1);
+
+    //        AudioSound._audioSound.AudioBulletCharacter();
+    //    }
+    //}
+
+    // for Android
+    public void Fire()
     {
-        if (Input.GetButtonDown("Fire1"))
+        CrossPlatformInputManager.GetButtonDown("Fire1");
+        _position = transform.position;
+
+        if (_isFacingRight == true)
         {
-            _direction = transform.right * (_sprite.flipX ? -1 : 1);
-            _position = transform.position;
-
-            if (_direction.x > 0)
-            {
-                _position.x += 1;
-            }
-            else
-            {
-                _position.x -= 1;
-            }
-
+            _position.x += 1;
             var newBullet = Instantiate(_bullet, _position, _bullet.transform.rotation);
-
-            // при стрельбе мы являемся родителем пули и она нас не бьет
-            //newBullet.Parent = gameObject;
-
-            //задаем направление движения созданной пули
-            newBullet.Direction = newBullet.transform.right * (_sprite.flipX ? -1 : 1);
-
-            AudioSound._audioSound.AudioBulletCharacter();
+            newBullet.Direction = newBullet.transform.right;
         }
+
+        else if (_isFacingRight == false)
+        {
+            _position.x -= 1;
+            var newBullet = Instantiate(_bullet, _position, _bullet.transform.rotation);
+            newBullet.Direction = -newBullet.transform.right;
+        }
+
+        AudioSound._audioSound.AudioBulletCharacter();
     }
 
     public override void ReceiveDamage()
@@ -254,6 +334,8 @@ public class Character : Unit
         {
             Die();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+
+            // CheckPoint
             //if (_playerPosition == new Vector3(0, 0, 0))
             //{
             //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
@@ -312,6 +394,15 @@ public class Character : Unit
     private void NormalJumpForce()
     {
         _jumpForce -= _plusJumpForce;
+    }
+
+    private void Flip()
+    {
+        // проверка на поворот
+        _isFacingRight = !_isFacingRight;
+        Vector2 scaler = transform.localScale;
+        scaler.x *= -1;
+        transform.localScale = scaler;
     }
 
     #endregion
