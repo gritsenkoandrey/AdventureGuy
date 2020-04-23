@@ -23,7 +23,6 @@ public class Coin : MonoBehaviour
         {
             AudioSound._audioSound.AudioGetCoin();
             Invoke(nameof(Scene), _timeLoadindScene);
-            //Destroy(gameObject);
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }

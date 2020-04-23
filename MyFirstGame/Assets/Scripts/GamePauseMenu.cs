@@ -49,7 +49,7 @@ public class GamePauseMenu : MonoBehaviour
             }
         }
 
-        // for Android
+        // for Android криво работает
         //if(CrossPlatformInputManager.GetButtonDown("Cancel"))
         //{
         //    if (_isPaused)

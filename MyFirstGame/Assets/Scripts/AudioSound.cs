@@ -3,7 +3,6 @@
 
 public class AudioSound : MonoBehaviour
 {
-    // класс под AudioSource создал, но пока не реализовал в проекте
 
     #region Fields
 

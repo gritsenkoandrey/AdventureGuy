@@ -3,6 +3,8 @@
 
 public class MovingPlatformAngle : MonoBehaviour
 {
+    #region Fields
+
     // точка вокруг которой будет двигаться платформа
     [SerializeField] private Transform _centerPointPlatform;
 
@@ -15,6 +17,11 @@ public class MovingPlatformAngle : MonoBehaviour
     private float _positionX = 0f;
     private float _positionY = 0f;
     private float _angle = 0f;
+
+    #endregion
+
+
+    #region UnityMethod
 
     void Update()
     {
@@ -29,4 +36,6 @@ public class MovingPlatformAngle : MonoBehaviour
 
         transform.position = new Vector2(_positionX, _positionY);
     }
+
+    #endregion
 }

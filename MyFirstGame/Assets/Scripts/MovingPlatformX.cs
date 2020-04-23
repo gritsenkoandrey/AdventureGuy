@@ -3,6 +3,8 @@
 
 public class MovingPlatformX : MonoBehaviour
 {
+    #region Fields
+
     [SerializeField] private Transform _point;
 
     [SerializeField] private float _speed;
@@ -10,10 +12,20 @@ public class MovingPlatformX : MonoBehaviour
 
     private bool _isMovingRight;
 
+    #endregion
+
+
+    #region UnityMethod
+
     private void Update()
     {
         MovingPlatform();
     }
+
+    #endregion
+
+
+    #region Method
 
     private void MovingPlatform()
     {
@@ -36,4 +48,6 @@ public class MovingPlatformX : MonoBehaviour
             transform.position = new Vector2(transform.position.x - _speed * Time.deltaTime, transform.position.y);
         }
     }
+
+    #endregion
 }

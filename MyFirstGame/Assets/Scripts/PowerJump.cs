@@ -17,6 +17,7 @@ public class PowerJump : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D jumpForce)
     {
         _character = jumpForce.GetComponent<Character>();
+
         if(_character)
         {
             AudioSound._audioSound.AudioGetPowerJump();

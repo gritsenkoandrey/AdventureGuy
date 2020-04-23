@@ -3,6 +3,8 @@
 
 public class PlatformActivator : MonoBehaviour
 {
+    #region Fields
+
     // платформа с которой взаимодействуем
     [SerializeField] private MovingPlatformY _platform;
 
@@ -18,6 +20,11 @@ public class PlatformActivator : MonoBehaviour
     // задаваемая скорость платформы
     [SerializeField] private float _speedActivationPlatform = 3.0f;
     private bool _isActive = false;
+
+    #endregion
+
+
+    #region UnityMethod
 
     private void Awake()
     {
@@ -54,4 +61,6 @@ public class PlatformActivator : MonoBehaviour
     //    // поднятие кнопки
     //    transform.position = new Vector2(transform.position.x, _normalButtonPosition);
     //}
+
+    #endregion
 }

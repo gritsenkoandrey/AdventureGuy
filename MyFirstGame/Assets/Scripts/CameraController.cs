@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float _speed = 2.0f;
 
     [SerializeField] private Transform _target;
+    // смещение камеры по оси Z
+    private float _transformPositionZ = -10.0f;
 
     #endregion
 
@@ -28,7 +30,7 @@ public class CameraController : MonoBehaviour
     {
         // перемещает камеру за персонажем
         Vector3 position = _target.position;
-        position.z = -10.0f;
+        position.z = _transformPositionZ;
         transform.position = Vector3.Lerp(transform.position, position, _speed * Time.deltaTime);
     }
 
