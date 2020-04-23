@@ -3,9 +3,6 @@
 
 public class Unit : MonoBehaviour
 {
-    private Rigidbody2D _rigidbody;
-
-
     #region Methods
 
     public virtual void ReceiveDamage()

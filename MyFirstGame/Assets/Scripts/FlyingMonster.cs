@@ -37,6 +37,7 @@ public class FlyingMonster : Monster
         if (bullet)
         {
             ReceiveDamage();
+            Explosion();
         }
 
         var unit = collider.GetComponent<Unit>();

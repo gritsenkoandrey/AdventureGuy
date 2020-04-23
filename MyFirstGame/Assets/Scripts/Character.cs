@@ -46,6 +46,9 @@ public class Character : Unit
     private bool _isFacingRight = true;
     private float _moveInput;
 
+    // jump
+    //private bool _isJump;
+
     #endregion
 
 
@@ -203,14 +206,10 @@ public class Character : Unit
     //    if (Input.GetButton("Horizontal"))
     //    {
     //        _direction = transform.right * Input.GetAxis("Horizontal");
-
     //        var speed = _speed * Time.deltaTime;
     //        _position = transform.position;
-
     //        transform.position = Vector3.MoveTowards(_position, transform.position + _direction, speed);
-
     //        _sprite.flipX = _direction.x < 0;
-
     //        if (_isGround)
     //        {
     //            State = CharacterState.Run;
@@ -218,7 +217,7 @@ public class Character : Unit
     //    }
     //}
 
-    // for PC
+    //// for PC
     //public void Jump()
     //{
     //    //if (_isGround && Input.GetButtonDown("Jump"))
@@ -258,8 +257,8 @@ public class Character : Unit
         if (_extraJump > 0)
         {
             _rigidbody.velocity = Vector2.up * _jumpForce;
-            _extraJump--;
             AudioSound._audioSound.AudioJumpCharacter();
+            _extraJump--;
         }
         else if (_extraJump == 0 && _isGround == true)
         {
@@ -275,7 +274,6 @@ public class Character : Unit
     //    {
     //        _direction = transform.right * (_sprite.flipX ? -1 : 1);
     //        _position = transform.position;
-
     //        if (_direction.x > 0)
     //        {
     //            _position.x += 1;
@@ -284,15 +282,11 @@ public class Character : Unit
     //        {
     //            _position.x -= 1;
     //        }
-
     //        var newBullet = Instantiate(_bullet, _position, _bullet.transform.rotation);
-
     //        // при стрельбе мы являемся родителем пули и она нас не бьет
     //        //newBullet.Parent = gameObject;
-
     //        //задаем направление движения созданной пули
     //        newBullet.Direction = newBullet.transform.right * (_sprite.flipX ? -1 : 1);
-
     //        AudioSound._audioSound.AudioBulletCharacter();
     //    }
     //}
