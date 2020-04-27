@@ -461,7 +461,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1379153844393647513}
-          m_MethodName: Update
+          m_MethodName: SetDownState
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -589,7 +589,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 3932197737430158991}
-          m_MethodName: Update
+          m_MethodName: SetDownState
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

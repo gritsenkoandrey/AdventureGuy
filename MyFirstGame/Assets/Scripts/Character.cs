@@ -95,7 +95,6 @@ public class Character : Unit
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
         _livesBar = FindObjectOfType<LivesBar>();
@@ -103,6 +102,8 @@ public class Character : Unit
 
     private void Start()
     {
+        _rigidbody = GetComponent<Rigidbody2D>();
+
         // определяем слои
         _playerObject = LayerMask.NameToLayer("Player");
         _colliderObject = LayerMask.NameToLayer("Platform");
@@ -189,6 +190,7 @@ public class Character : Unit
         _moveInput = CrossPlatformInputManager.GetAxis("Horizontal");
 
         _rigidbody.velocity = new Vector2(_moveInput * _speed, _rigidbody.velocity.y);
+
 
         if (_isFacingRight == false && _moveInput > 0)
         {
@@ -310,7 +312,6 @@ public class Character : Unit
             var newBullet = Instantiate(_bullet, _position, _bullet.transform.rotation);
             newBullet.Direction = -newBullet.transform.right;
         }
-
         AudioSound._audioSound.AudioBulletCharacter();
     }
 
